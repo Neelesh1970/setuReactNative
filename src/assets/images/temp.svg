@@ -1,0 +1,21 @@
+<<<<<<< HEAD
+<svg width="240" height="89" viewBox="0 0 240 89" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path fill-rule="evenodd" clip-rule="evenodd" d="M10 0C4.47715 0 0 4.47715 0 10V81C0 85.4183 3.58172 89 8 89H83C87.4183 89 90.9068 85.3746 91.8594 81.0603C95.0368 66.67 106.654 56 120.5 56C134.346 56 145.963 66.67 149.141 81.0603C150.093 85.3746 153.582 89 158 89H232C236.418 89 240 85.4183 240 81V10C240 4.47715 235.523 0 230 0H10Z" fill="url(#paint0_linear_233_474)"/>
+<defs>
+<linearGradient id="paint0_linear_233_474" x1="-90.5" y1="111.806" x2="430.264" y2="-9.19978" gradientUnits="userSpaceOnUse">
+<stop stop-color="#85DCFC"/>
+<stop offset="1" stop-color="#2372B5"/>
+</linearGradient>
+</defs>
+</svg>
+=======
+<svg width="240" height="89" viewBox="0 0 240 89" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path fill-rule="evenodd" clip-rule="evenodd" d="M10 0C4.47715 0 0 4.47715 0 10V81C0 85.4183 3.58172 89 8 89H83C87.4183 89 90.9068 85.3746 91.8594 81.0603C95.0368 66.67 106.654 56 120.5 56C134.346 56 145.963 66.67 149.141 81.0603C150.093 85.3746 153.582 89 158 89H232C236.418 89 240 85.4183 240 81V10C240 4.47715 235.523 0 230 0H10Z" fill="url(#paint0_linear_233_474)"/>
+<defs>
+<linearGradient id="paint0_linear_233_474" x1="-90.5" y1="111.806" x2="430.264" y2="-9.19978" gradientUnits="userSpaceOnUse">
+<stop stop-color="#85DCFC"/>
+<stop offset="1" stop-color="#2372B5"/>
+</linearGradient>
+</defs>
+</svg>
+>>>>>>> origin/dev_jobs

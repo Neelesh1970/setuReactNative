@@ -1,0 +1,23 @@
+<<<<<<< HEAD
+<svg width="2400" height="891" viewBox="0 0 2400 891" fill="none" xmlns="http://www.w3.org/2000/svg">
+<rect width="2400" height="891" fill="#F5F5F5"/>
+<path fill-rule="evenodd" clip-rule="evenodd" d="M100 0.5C44.7715 0.5 0 45.2715 0 100.5V810.5C0 854.683 35.8172 890.5 80 890.5H830C874.183 890.5 909.068 854.246 918.594 811.103C950.368 667.2 1066.54 560.5 1205 560.5C1343.46 560.5 1459.63 667.2 1491.41 811.103C1500.93 854.246 1535.82 890.5 1580 890.5H2320C2364.18 890.5 2400 854.683 2400 810.5V100.5C2400 45.2715 2355.23 0.5 2300 0.5H100Z" fill="url(#paint0_linear_0_1)"/>
+<defs>
+<linearGradient id="paint0_linear_0_1" x1="-905" y1="1118.56" x2="4302.64" y2="-91.4978" gradientUnits="userSpaceOnUse">
+<stop stop-color="#85DCFC"/>
+<stop offset="1" stop-color="#2372B5"/>
+</linearGradient>
+</defs>
+</svg>
+=======
+<svg width="2400" height="891" viewBox="0 0 2400 891" fill="none" xmlns="http://www.w3.org/2000/svg">
+<rect width="2400" height="891" fill="#F5F5F5"/>
+<path fill-rule="evenodd" clip-rule="evenodd" d="M100 0.5C44.7715 0.5 0 45.2715 0 100.5V810.5C0 854.683 35.8172 890.5 80 890.5H830C874.183 890.5 909.068 854.246 918.594 811.103C950.368 667.2 1066.54 560.5 1205 560.5C1343.46 560.5 1459.63 667.2 1491.41 811.103C1500.93 854.246 1535.82 890.5 1580 890.5H2320C2364.18 890.5 2400 854.683 2400 810.5V100.5C2400 45.2715 2355.23 0.5 2300 0.5H100Z" fill="url(#paint0_linear_0_1)"/>
+<defs>
+<linearGradient id="paint0_linear_0_1" x1="-905" y1="1118.56" x2="4302.64" y2="-91.4978" gradientUnits="userSpaceOnUse">
+<stop stop-color="#85DCFC"/>
+<stop offset="1" stop-color="#2372B5"/>
+</linearGradient>
+</defs>
+</svg>
+>>>>>>> origin/dev_jobs
