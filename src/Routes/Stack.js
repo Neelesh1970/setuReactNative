@@ -45,6 +45,15 @@ import {
   DoctorPaymentFailure,
 } from "../Screens/TeleMedicines";
 import { Text, TouchableOpacity, View } from "react-native";
+import GovernmentSchemesScreen from "../Screens/GovernmentSchemes/GovernmentSchemesScreen";
+import CategoriesScreen from "../Screens/GovernmentSchemes/CategoriesScreen";
+import SchemeListScreen from "../Screens/GovernmentSchemes/SchemeListScreen";
+import StateSchemesList from "../Screens/GovernmentSchemes/StateSchemesList";
+import EligibleSchemesScreen from "../Screens/GovernmentSchemes/EligibleSchemesScreen";
+import SchemeDetailScreen from '../Screens/GovernmentSchemes/SchemeDetailScreen';
+import SchemeOverviewScreen from '../Screens/GovernmentSchemes/SchemeOverviewScreen';
+import HealthDataScreen from "../Screens/GovernmentSchemes/HealthDataScreen";
+
 import {
   DrugDirectoryAtoZ,
   DrugDirectoryHome,
@@ -97,6 +106,9 @@ import {
 } from "../Screens/Abha";
 import { s, vs } from "react-native-size-matters";
 import { ReportScreen, ViewReportScreen } from "../Screens/Reports";
+import AgricultureNavigator from "../Screens/NewAgriculture/navigation/AgricultureNavigator";
+import TempleAartiScreen from "../Screens/Temple_Aarti/TempleAartiScreen";
+import AgricultureHomeScreen from "../Screens/NewAgriculture/AgricultureHomeScreen";
 
 const Stack = createStackNavigator();
 
@@ -197,6 +209,70 @@ export const StackNavigation = ({ navigation }) => {
           headerShown: false,
         }}
       />
+      
+      
+      <Stack.Screen
+        name="GovernmentSchemes"
+        component={GovernmentSchemesScreen}
+        options={{
+          headerShown: false,
+        }}
+      />
+      <Stack.Screen
+        name="StateSchemesList"
+        component={StateSchemesList}
+        options={{
+          headerShown: false,
+        }}
+      />
+      <Stack.Screen
+        name="EligibleSchemes"
+        component={EligibleSchemesScreen}
+        options={{
+          headerShown: false,
+        }}
+      />
+      <Stack.Screen
+        name="Categories"
+        component={CategoriesScreen}
+        options={{
+          headerShown: false,
+        }}
+      />
+      <Stack.Screen
+        name="SchemeList"
+        component={SchemeListScreen}
+        options={({ route }) => ({
+          headerShown: false,
+        })}
+      />
+
+
+    
+     
+      <Stack.Screen
+        name="SchemeOverview"
+        component={SchemeOverviewScreen}
+        options={{
+          headerShown: false,
+        }}
+      />
+      <Stack.Screen
+        name="HealthDataScreen"
+        component={HealthDataScreen}
+        options={{
+          headerShown: false,
+        }}
+      />
+      <Stack.Screen
+        name="SchemeDetail"
+        component={SchemeDetailScreen}
+        options={{
+          headerShown: false,
+        }}
+      />
+      
+    
 
       <Stack.Screen
         name="HealthPackageCard"
@@ -280,13 +356,7 @@ export const StackNavigation = ({ navigation }) => {
           headerShown: false,
         }}
       />
-      <Stack.Screen
-        name="Categories"
-        component={Categories}
-        options={{
-          headerShown: false,
-        }}
-      />
+
       <Stack.Screen
         name="ProductDetails"
         component={ProductDetails}
@@ -304,6 +374,14 @@ export const StackNavigation = ({ navigation }) => {
       <Stack.Screen
         name="AgriCartScreen"
         component={AgriCartScreen}
+        options={{
+          headerShown: false,
+        }}
+      />
+
+      <Stack.Screen
+        name="AgricultureNavigator"
+        component={AgricultureNavigator}
         options={{
           headerShown: false,
         }}
@@ -1147,6 +1225,23 @@ export const StackNavigation = ({ navigation }) => {
       <Stack.Screen
         name="ViewReportScreen"
         component={ViewReportScreen}
+        options={{
+          headerShown: false,
+        }}
+      />
+
+      {/* Temple Aarti Screens */}
+      <Stack.Screen
+        name="TempleAartiScreen"
+        component={TempleAartiScreen}
+        options={{
+          headerShown: false,
+        }}
+      />
+
+<Stack.Screen
+        name="AgricultureHomeScreen"
+        component={AgricultureHomeScreen}
         options={{
           headerShown: false,
         }}

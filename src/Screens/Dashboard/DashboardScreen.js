@@ -48,49 +48,61 @@ export default function DashboardScreen({ navigation }) {
   const _renderIcon = (routeName, selectedTab) => {
     let icon = "";
     let text = "";
-    let defaultstyle = styles.unSelectedIcon;
-    let style = styles.selectedIcon;
+    let iconStyle = styles.unSelectedIcon;
+    let textColor = color.white;
 
     switch (routeName) {
       case DASHBOARD_BOTTOM.HOME:
         icon = Icons.dashboard_home;
+        iconStyle =
+          routeName === selectedTab
+            ? styles.selectedIcon
+            : styles.unSelectedIcon;
         text = t("home");
         break;
       case DASHBOARD_BOTTOM.CALENDAR:
-        icon = Icons.dashboard_calendar;
+        icon = Icons.dashboard_calendar_new;
+        iconStyle =
+          routeName === selectedTab
+            ? styles.calendarSelected
+            : styles.calendarUnselected;
         text = t("schedule");
         break;
       case DASHBOARD_BOTTOM.REPORT:
         icon = Icons.dashboard_report;
+        iconStyle =
+          routeName === selectedTab
+            ? styles.reportSelected
+            : styles.reportUnselected;
         text = t("report");
         break;
       case DASHBOARD_BOTTOM.ROBO:
         icon = Icons.dashboard_robo;
+        iconStyle =
+          routeName === selectedTab
+            ? styles.chatbotSelected
+            : styles.chatbotUnselected;
         text = t("setuchat");
         break;
     }
+
     return (
-      <View style={{ alignItems: "center" }}>
-        <Image
-          source={icon}
-          style={
-            routeName === selectedTab
-              ? styles.selectedIcon
-              : styles.unSelectedIcon
-          }
-        />
+      <View style={{ alignItems: "center", justifyContent: "center" }}>
+        <Image source={icon} style={iconStyle} />
         <Text
           style={{
             color: color.white,
             fontFamily: "medium",
             fontSize: 11,
+            marginTop: 4,
           }}
         >
-          {routeName === selectedTab ? text : ""}
+          {text}
         </Text>
       </View>
     );
   };
+
   const renderTabBar = ({ routeName, selectedTab, navigate }) => {
     return (
       <TouchableOpacity
@@ -128,7 +140,12 @@ export default function DashboardScreen({ navigation }) {
                 style={styles.button}
                 onPress={() => navigation.navigate("Emergency")}
               >
-                <Image source={Icons.dashboard_sos} style={styles.centerSOS} />
+                <Text
+                  style={{ color: "white", fontWeight: "bold", fontSize: 16 }}
+                >
+                  HELP
+                </Text>
+                {/* <Image source={Icons.dashboard_sos} style={styles.centerSOS} /> */}
               </TouchableOpacity>
             </Animated.View>
           )}
@@ -188,11 +205,11 @@ export const styles = StyleSheet.create({
   btnCircleUp: {
     width: 60,
     height: 60,
-    borderRadius: 30,
+    borderRadius: 80,
     alignItems: "center",
     justifyContent: "center",
-    backgroundColor: "#E8E8E8",
-    bottom: 30,
+    backgroundColor: "#EA080E",
+    bottom: 20,
     shadowColor: "#000",
     shadowOffset: {
       width: 0,
@@ -243,5 +260,29 @@ export const styles = StyleSheet.create({
   centerSOS: {
     height: ms(58),
     width: ms(58),
+  },
+  calendarSelected: {
+    height: ms(26),
+    width: ms(26),
+  },
+  calendarUnselected: {
+    height: ms(26),
+    width: ms(26),
+  },
+  reportSelected: {
+    height: ms(28),
+    width: ms(28),
+  },
+  reportUnselected: {
+    height: ms(26),
+    width: ms(26),
+  },
+  chatbotSelected: {
+    height: ms(25),
+    width: ms(25),
+  },
+  chatbotUnselected: {
+    height: ms(26),
+    width: ms(26),
   },
 });
