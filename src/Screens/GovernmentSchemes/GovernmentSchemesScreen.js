@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, Image, StyleSheet, TouchableOpacity, SafeAreaView, Dimensions, ScrollView, ActivityIndicator } from 'react-native';
+import DashboardScreen from '../Dashboard/DashboardScreen';
 
 // Try to import the image directly
 let group1Image;
@@ -105,7 +106,10 @@ const GovernmentSchemesScreen = ({ navigation }) => {
         {/* Central Govt Card */}
         <TouchableOpacity 
           style={styles.centralCard}
-          onPress={() => navigation.navigate('Categories', { schemeType: 'central' })}
+          onPress={() => navigation.navigate('CentralSchemesList', { 
+            schemeType: 'central',
+            schemeTitle: 'Central Government Schemes'
+          })}
         >
           <View style={styles.cardImageContainer}>
             <Image 
@@ -138,6 +142,8 @@ const GovernmentSchemesScreen = ({ navigation }) => {
           </View>
         </TouchableOpacity>
       </ScrollView>
+      {/* Bottom Navigation */}
+                <DashboardScreen/>
     </SafeAreaView>
   );
 };
@@ -154,9 +160,9 @@ const styles = StyleSheet.create({
   header: {
     flexDirection: 'row',
     alignItems: 'center',
-    padding: 15,
+    padding: 8,
     backgroundColor: '#FFFFFF',
-    borderBottomWidth: 0.5,
+    borderBottomWidth: 0.3,
     borderBottomColor: '#e0e0e0',
   },
   backButton: {
@@ -172,7 +178,7 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: '600',
     textAlign: 'center',
-    marginRight: 30,
+    marginRight: 20,
   },
   docIconContainer: {
     width: 32,
@@ -242,7 +248,7 @@ const styles = StyleSheet.create({
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.1,
-    shadowRadius: 4,
+    shadowRadius: 2,
     height: 200,
     overflow: 'hidden',
   },

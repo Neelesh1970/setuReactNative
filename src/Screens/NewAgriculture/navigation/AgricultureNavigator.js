@@ -26,21 +26,20 @@ const PlaceholderScreen = ({ route }) => (
 );
 
 // Main Tab Navigator
-const MainTabs = () => {
+
+function MainTabs() {
   return (
     <Tab.Navigator
-      screenOptions={{
-        headerShown: false,
-        tabBarStyle: { display: 'none' } // Hide the default tab bar since we're using our custom one
-      }}
+      screenOptions={{ headerShown: false }}
+      tabBar={props => <DashboardScreen {...props} />}
     >
-      <Tab.Screen name="AgricultureHome" component={AgricultureHomeScreen} />
+      <Tab.Screen name="AgricultureHome"   component={AgricultureHomeScreen} />
       <Tab.Screen name="AgricultureReports" component={ReportsPlaceholder} />
       <Tab.Screen name="AgricultureSchedule" component={ScheduleScreen} />
-      <Tab.Screen name="AgricultureChat" component={SetuChatScreen} />
+      <Tab.Screen name="AgricultureChat"     component={SetuChatScreen} />
     </Tab.Navigator>
   );
-};
+}
 
 const AgricultureNavigator = () => {
   return (

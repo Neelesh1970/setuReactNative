@@ -49,6 +49,7 @@ import GovernmentSchemesScreen from "../Screens/GovernmentSchemes/GovernmentSche
 import CategoriesScreen from "../Screens/GovernmentSchemes/CategoriesScreen";
 import SchemeListScreen from "../Screens/GovernmentSchemes/SchemeListScreen";
 import StateSchemesList from "../Screens/GovernmentSchemes/StateSchemesList";
+import CentralSchemesList from "../Screens/GovernmentSchemes/CentralSchemesList";
 import EligibleSchemesScreen from "../Screens/GovernmentSchemes/EligibleSchemesScreen";
 import SchemeDetailScreen from '../Screens/GovernmentSchemes/SchemeDetailScreen';
 import SchemeOverviewScreen from '../Screens/GovernmentSchemes/SchemeOverviewScreen';
@@ -221,6 +222,13 @@ export const StackNavigation = ({ navigation }) => {
       <Stack.Screen
         name="StateSchemesList"
         component={StateSchemesList}
+        options={{
+          headerShown: false,
+        }}
+      />
+      <Stack.Screen
+        name="CentralSchemesList"
+        component={CentralSchemesList}
         options={{
           headerShown: false,
         }}
