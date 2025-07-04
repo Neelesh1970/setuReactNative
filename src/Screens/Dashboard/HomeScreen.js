@@ -8,23 +8,23 @@ import {
   Text,
   ScrollView,
   StatusBar,
-
-} from 'react-native';
-import { color } from '../../assets/colors/Colors';
-import { Icons } from '../../assets/icons/Icons';
-import { ms } from 'react-native-size-matters';
-import HomeButton from '../../Components/HomeButton';
-import { PageIndicator } from 'react-native-page-indicator';
-import PagerView from 'react-native-pager-view';
-import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import { screenHeight } from '../../Utils/utils';
-import BottomSlider from '../../Components/DashBoardBottomSlider';
-import DashboardHeader from '../../Components/DashboardHeader';
-import { isTablet } from 'react-native-device-info';
-import { setActiveModule } from '../../features/auth/authSlice';
-import { useDispatch } from 'react-redux';
-import { useNavigation } from '@react-navigation/native';
-import AsyncStorage from '@react-native-async-storage/async-storage';
+} from "react-native";
+import { color } from "../../assets/colors/Colors";
+import { Icons } from "../../assets/icons/Icons";
+import { ms } from "react-native-size-matters";
+import HomeButton from "../../Components/HomeButton";
+import { PageIndicator } from "react-native-page-indicator";
+import PagerView from "react-native-pager-view";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
+import { screenHeight } from "../../Utils/utils";
+import BottomSlider from "../../Components/DashBoardBottomSlider";
+import DashboardHeader from "../../Components/DashboardHeader";
+import { isTablet } from "react-native-device-info";
+import { setActiveModule } from "../../features/auth/authSlice";
+import { useDispatch } from "react-redux";
+import { useNavigation } from "@react-navigation/native";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { Icon } from "react-native-paper";
 
 const DATA = [
   {
@@ -51,22 +51,63 @@ const languages = [
 
 const HomeIcons = [
   { id: 2, iconImg: Icons.home_medical_app, label: "Appointment" },
-  { id: 3, iconImg: Icons.home_stethoscope, label: "Book Tests" },
-  { id: 18, iconImg: Icons.order_medicine, label: "Agriculture" },
-  { id: 15, iconImg: Icons.home_van, label: "Generic Medicine" },
-  { id: 8, iconImg: Icons.home_eCart, label: "Jobs" },
-  { id: 4, iconImg: Icons.home_insurance, label: "Insurance" },
-  { id: 1, iconImg: Icons.home_phone, label: "Health Line" },
-  { id: 5, iconImg: Icons.home_asha, label: "Asha" },
-  { id: 6, iconImg: Icons.home_matrujyoti, label: "Matrujyoti" },
-  { id: 7, iconImg: Icons.home_fitness, label: "Fitness" },
-  { id: 9, iconImg: Icons.home_chatBot, label: "ChatBot" },
-  { id: 13, iconImg: Icons.home_eCart, label: "eCart" },
-  { id: 14, iconImg: Icons.home_chatBot, label: "ChatBot" },
-  { id: 19, iconImg: Icons.home_van, label: "Drug Directory" },
-  { id: 16, iconImg: Icons.home_state, label: "Government Schemes" },
-  { id: 17, iconImg: Icons.home_organ_donation, label: "Organ Donation" },
   { id: 20, iconImg: Icons.abha_logo, label: "ABHA" },
+  { id: 15, iconImg: Icons.home_van, label: "Generic Medicine" },
+  { id: 3, iconImg: Icons.dashboard_book_test, label: "Book Tests" },
+
+  { id: 22, iconImg: Icons.dashboard_digital_nurse, label: "Digital Nurse" },
+  { id: 23, iconImg: Icons.dashboard_mental_health, label: "Mental Health" },
+  { id: 19, iconImg: Icons.dashboard_drug_directory, label: "Drug Directory" },
+  { id: 4, iconImg: Icons.dashboard_insurance, label: "Insurance" },
+  { id: 34, iconImg: Icons.dashboard_health_funding, label: "Health Funding" },
+  {
+    id: 35,
+    iconImg: Icons.dashboard_genetic_mapping,
+    label: "Genetic Mapping",
+  },
+  {
+    id: 40,
+    iconImg: Icons.dashboard_health_analytics,
+    label: "Health Analytics",
+  },
+
+  { id: 6, iconImg: Icons.home_matrujyoti, label: "Matrujyoti" },
+  { id: 16, iconImg: Icons.home_state, label: "Government Schemes" },
+
+  { id: 13, iconImg: Icons.home_eCart, label: "eCart" },
+  { id: 8, iconImg: Icons.home_findJobs, label: "Jobs" },
+  { id: 5, iconImg: Icons.home_asha, label: "Asha" },
+  { id: 21, iconImg: Icons.dashboard_kpo_bpo, label: "BPO/KPO" },
+  { id: 24, iconImg: Icons.dashboard_eWealth, label: "eWealth" },
+  { id: 25, iconImg: Icons.dashboard_health_loan, label: "Health Loan" },
+  { id: 26, iconImg: Icons.dashboard_senior_citizen, label: "Senior Citizen" },
+  { id: 27, iconImg: Icons.dashboard_astrology, label: "Astrology" },
+  { id: 28, iconImg: Icons.dashboard_matrimony, label: "Matrimony" },
+  { id: 29, iconImg: Icons.dashboard_grocery, label: "FMCG/Grocery" },
+  { id: 30, iconImg: Icons.dashboard_education, label: "Education" },
+  { id: 31, iconImg: Icons.dashboard_my_pet, label: "My Pet" },
+  { id: 18, iconImg: Icons.dashboard_agriculture, label: "Agriculture" },
+  { id: 32, iconImg: Icons.dashboard_ayush, label: "Ayush", imageheight: 50, imagewidth: 50 },
+  { id: 7, iconImg: Icons.dashboard_fitness, label: "Fitness" },
+  { id: 33, iconImg: Icons.dashboard_games, label: "Games" },
+
+  { id: 36, iconImg: Icons.dashboard_sex_education, label: "Sex Education" },
+  { id: 37, iconImg: Icons.dashboard_health_video, label: "Health Video" },
+  { id: 38, iconImg: Icons.dashboard_memory_bank, label: "Memory Bank" },
+  { id: 39, iconImg: Icons.dashboard_iot_sensors, label: "IOT Sensors" },
+  { id: 17, iconImg: Icons.dashboard_organ_donor, label: "Organ Donor" },
+  { id: 10, iconImg: Icons.dashboard_temple_aarti, label: "Temple Aarti" },
+  { id: 12, iconImg: Icons.dashboard_stem_cell, label: "Stem Cells" },
+  { id: 1, iconImg: Icons.dashboard_ai_calculator, label: "AI Calculator" },
+  { id: 9, iconImg: Icons.dashboard_nuetraceuticals, label: "Nutraceuticals" },
+  {
+    id: 14,
+    iconImg: Icons.dashboard_offers_discounts,
+    label: "Offers & Discount",
+  },
+  { id: 11, iconImg: Icons.dashboard_reels, label: "Reels" },
+  { id: 41, iconImg: Icons.dashboard_ott, label: "OTT" },
+  { id: 42, iconImg: Icons.dashboard_health_coin, label: "Health Coin" },
 ];
 
 const itemsPerPage_ = 9;
@@ -88,6 +129,13 @@ export default function HomeScreen({ mainNavigation }) {
   const [userName, setUserName] = useState(null);
 
 
+
+  const iconSizes = {
+
+    32: { width: 80, height: 80 },
+    // Add all relevant ids here with their manual sizes
+  };
+
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -106,9 +154,8 @@ export default function HomeScreen({ mainNavigation }) {
   }, []);
 
   useEffect(() => {
-    setUserName(username)
+    setUserName(username);
   }, [username]);
-
 
   const totalPages = Math.ceil(HomeIcons.length / itemsPerPage);
   const _pages = [];
@@ -137,13 +184,17 @@ export default function HomeScreen({ mainNavigation }) {
       dispatch(setActiveModule("booktest"));
     } else if (index === 18) {
       dispatch(setActiveModule("agri"));
-      mainNavigation.navigate("AgricultureScreen");
+      mainNavigation.navigate("AgricultureHomeScreen");
     } else if (index === 15) {
       mainNavigation.navigate("GenericMedicineHome");
+    } else if (index === 16) {
+      mainNavigation.navigate("GovernmentSchemes");
     } else if (index === 19) {
       mainNavigation.navigate("DrugDirectoryHome");
     } else if (index === 20) {
       mainNavigation.navigate("Abha");
+    } else if (index === 10) {
+      mainNavigation.navigate("TempleAartiScreen");
     }
     // else {
     //   mainNavigation.navigate("DrugDirectoryHome");
@@ -158,78 +209,73 @@ export default function HomeScreen({ mainNavigation }) {
       numberOfElementsLastRow !== numColumns &&
       numberOfElementsLastRow !== 0
     ) {
-      data.push({ id: `blank-${numberOfElementsLastRow}`, value: null }); // Add a placeholder
-      numberOfElementsLastRow++;
-    }
+      data.push({ id: `blank - ${ numberOfElementsLastRow }`, value: null }); // Add a placeholder
+    numberOfElementsLastRow++;
+  }
 
-    return data;
-  };
+  return data;
+};
 
-  const renderHomeIcons = ({ item }) => {
-    if (item.value === null) {
-      return <View style={[styles.gridItem]} />;
-    }
+const renderHomeIcons = ({ item }) => {
+  if (item.value === null) {
+    return <View style={[styles.gridItem]} />;
+  }
 
-    return (
-      <View
-        style={styles.gridItem}
-        onLayout={(event) => {
-          const { height } = event.nativeEvent.layout;
-          if (itemHeight == 0) {
-            setItemHeight(height);
-          } else if (itemHeight < height) {
-            setItemHeight(height);
-          }
-          console.log("Dash board ", height);
-        }}
-      >
-        <HomeButton
-          iconImg={item.iconImg}
-          label={item.label}
-          id={item.id}
-          onClickMenu={OnMenuClick}
-        />
-      </View>
-    );
-  };
-
-  const pages = ["Page 1", "Page 2", "Page 3"];
-
-  const renderDots = () => (
-    <View style={styles.dotContainer}>
-      {Array.from({ length: numPages }).map((_, i) => (
-        <View
-          key={i}
-          style={[
-            styles.dot,
-            i === current ? styles.activeDot : styles.inactiveDot,
-          ]}
-        />
-      ))}
-    </View>
-  );
+  // Default size fallback if id not found
+  const { width = 55, height = 55 } = iconSizes[item.id] || {};
 
   return (
-    <View
-      style={{
-        flex: 1,
-        paddingBottom: ms(70),
-        backgroundColor: color.white,
-      }}
-    >
-      <DashboardHeader
-        title={'Welcome'}
-        name={userName}
-        onPressNavigation={() => {
-          // setSidebarVisible(true)
-          console.log("Main Navigation", mainNavigation);
-          navigation.toggleDrawer()
-        }
-        }
+    <View style={styles.gridItem}>
+      <HomeButton
+        iconImg={item.iconImg}
+        label={item.label}
+        id={item.id}
+        imagewidth={width}
+        imageheight={height}
+        onClickMenu={OnMenuClick}
       />
-      {/* {sidebarVisible && <CustomSidebar isVisible={sidebarVisible} onClose={() => setSidebarVisible(false)} />} */}
-      <StatusBar backgroundColor={color.editBlue} />
-      <PagerView
+    </View>
+  );
+};
+
+
+const pages = ["Page 1", "Page 2", "Page 3"];
+
+const renderDots = () => (
+  <View style={styles.dotContainer}>
+    {Array.from({ length: numPages }).map((_, i) => (
+      <View
+        key={i}
+        style={[
+          styles.dot,
+          i === current ? styles.activeDot : styles.inactiveDot,
+        ]}
+      />
+    ))}
+  </View>
+);
+
+return (
+  <View
+    style={{
+      flex: 1,
+      paddingBottom: ms(70),
+      backgroundColor: color.white,
+    }}
+  >
+    <DashboardHeader
+      title={"Welcome"}
+      name={userName}
+      onPressNavigation={() => {
+        // setSidebarVisible(true)
+        console.log("Main Navigation", mainNavigation);
+        navigation.toggleDrawer();
+      }}
+    />
+    {/* {sidebarVisible && <CustomSidebar isVisible={sidebarVisible} onClose={() => setSidebarVisible(false)} />} */}
+    <StatusBar backgroundColor={color.editBlue} />
+    {/* <BottomSlider /> */}
+    {/* <PagerView
         style={{ flex: 1, height: screenHeight - ms(300) }}
         initialPage={0}
         onLayout={(event) => {
@@ -265,18 +311,31 @@ export default function HomeScreen({ mainNavigation }) {
         {/* <View key="2">
           <Text>Second page</Text>
         </View> */}
-      </PagerView>
-      <PageIndicator
+    {/* </PagerView> */}
+
+    <FlatList
+      ListHeaderComponent={<BottomSlider />}
+      data={formatData(HomeIcons, numberOfColumn)}
+      renderItem={renderHomeIcons}
+      keyExtractor={(item) => item.id.toString()}
+      numColumns={numberOfColumn}
+      columnWrapperStyle={{ justifyContent: "space-between" }}
+      contentContainerStyle={{
+        paddingHorizontal: 10,
+        paddingBottom: 20,
+      }}
+    />
+
+    {/* <PageIndicator
         count={totalPages}
         current={current}
         variant="beads"
         color={color.indicator_color}
         activeColor={color.black}
         style={{ alignSelf: "center", padding: 10 }}
-      />
-      <BottomSlider />
-    </View>
-  );
+      /> */}
+  </View>
+);
 }
 
 {
@@ -306,8 +365,8 @@ export const styles = StyleSheet.create({
   },
   gridItem: {
     flex: 1,
-    marginHorizontal: 10,
-    marginBottom: 10,
+    // marginHorizontal: 10,
+    // marginBottom: 10,
     alignItems: "center",
   },
 

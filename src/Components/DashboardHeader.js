@@ -1,159 +1,138 @@
 import {
-  Image,
-  StyleSheet,
-  Text,
-  TouchableOpacity,
   View,
+  Text,
+  StyleSheet,
+  TouchableOpacity,
+  Image,
   Platform,
+  TextInput,
+  ToastAndroid,
 } from "react-native";
-import { Icons } from "../assets/icons/Icons";
 import React, { useEffect, useState } from "react";
-import { color } from "../assets/colors/Colors";
-import { ms } from "react-native-size-matters";
 import DropShadow from "react-native-drop-shadow";
-import { getItem } from "../Utils/utils";
-import { fetchUserProfileAPI } from "../Utils/api/auth";
-import { hideLoader, showLoader } from "../Utils/Loader";
-import { setUserData } from "../features/user/userSlice";
-import ToastService from "../Utils/ToastService";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import Clipboard from "@react-native-clipboard/clipboard";
 import { useNavigation } from "@react-navigation/native";
 import { useDispatch } from "react-redux";
-import AsyncStorage from '@react-native-async-storage/async-storage';
-import Clipboard from "@react-native-clipboard/clipboard";
-import { ToastAndroid } from "react-native";
 
-
+import { Icons } from "../assets/icons/Icons";
+import { color } from "../assets/colors/Colors";
+import { ms } from "react-native-size-matters";
+import { getItem } from "../Utils/utils";
+import { fetchUserProfileAPI } from "../Utils/api/auth";
+import { setUserData } from "../features/user/userSlice";
+import ToastService from "../Utils/ToastService";
+import { showLoader, hideLoader } from "../Utils/Loader";
 
 const DashboardHeader = ({
-  title,
-  name,
+  title = "Welcome",
+  name = "Nilesh",
   onPressNavigation,
   onBellPress,
-  onSearchPress,
-  onProfilePress,
 }) => {
-
-  const [userID, setUserID] = useState(null);
   const navigation = useNavigation();
   const dispatch = useDispatch();
   const [uhid, setUhid] = useState(null);
-  const [uhids, setUhids] = useState(null);
-
+  const [userID, setUserID] = useState(null);
 
   useEffect(() => {
     const fetchData = async () => {
-      try {
-        const storedUhid = await AsyncStorage.getItem('uhid');
-        setUhid(storedUhid);
-      } catch (error) {
-        console.log('Error retrieving data:', error);
-      }
+      const storedUhid = await AsyncStorage.getItem("uhid");
+      setUhid(storedUhid);
     };
     fetchData();
   }, []);
 
   useEffect(() => {
-    setUhids(uhid)
-  }, [uhid]);
-  
-
-  useEffect(() => {
     const fetchUserID = async () => {
-      const id = await getItem('userID');
-      if (id) {
-        setUserID(id);
-      }
+      const id = await getItem("userID");
+      if (id) setUserID(id);
     };
     fetchUserID();
   }, []);
 
   const copyToClipboard = () => {
-    if (uhids) {
-      Clipboard.setString(uhids);
-      ToastAndroid.show(`UHID ${uhids} copied to clipboard!`, ToastAndroid.SHORT);
+    if (uhid) {
+      Clipboard.setString(uhid);
+      ToastAndroid.show(
+        ` UHID ${uhid} copied to clipboard!`,
+        ToastAndroid.SHORT
+      );
     }
   };
 
-  // Fetch User Profile API Call 
   const fetchUserProfile = async () => {
     showLoader();
-    const data = {
-      "user_id": userID,
-    };
-    console.log('fetchUserProfile data:', data);
+    const data = { user_id: userID };
+
     try {
       const response = await fetchUserProfileAPI(data);
-      console.log('fetchUserProfileAPI Response:', response);
-
-      if (response && (response.status === 200 || response.status === 201) && !response?.data?.hasError) {
+      if (
+        response &&
+        (response.status === 200 || response.status === 201) &&
+        !response?.data?.hasError
+      ) {
         const userData = response.data.data;
         dispatch(setUserData(userData));
         navigation.navigate("EditUserProfile", { userData });
       } else {
-        ToastService.showError('Error!', response.data.message || "Something Went Wrong");
+        ToastService.showError(
+          "Error!",
+          response.data.message || "Something went wrong"
+        );
       }
     } catch (error) {
-      console.log('Error from fetchUserProfileAPI call:', error.response ? error.response.data : error.message);
-      ToastService.showError('Error!', error.response?.data?.message || "An error occurred. Please try again later.");
+      ToastService.showError(
+        "Error!",
+        error.response?.data?.message ||
+          "An error occurred. Please try again later."
+      );
     } finally {
       hideLoader();
     }
   };
 
-  const handleProfilePress = () => {
-    fetchUserProfile();
-  }
   return (
     <DropShadow style={styles.shadowProp}>
       <View style={styles.headerContainer}>
-        <TouchableOpacity
-          onPress={onPressNavigation}
-          style={styles.iconContainer}
-        >
-          <Image source={Icons.dashboard_navigation} style={styles.icon} />
-        </TouchableOpacity>
-        <TouchableOpacity onPress={null} style={styles.iconContainer}>
-          <Image source={Icons.dashboard_bell} style={styles.icon} />
-        </TouchableOpacity>
-        <View style={[styles.iconContainer, { flexDirection: "row", alignItems: "center" }]}>
-          <Text style={[styles.uhidText, { marginRight: 4 }]}>UHID:</Text>
-          <TouchableOpacity onPress={copyToClipboard}>
-            <Text style={styles.uhidText}>{uhids ?? ""}</Text>
-          </TouchableOpacity>
-        </View>
-
-        <View
-          style={{
-            position: "absolute",
-
-            right: 10,
-            top: 0,
-            bottom: 0,
-            justifyContent: "center",
-            flexDirection: "row",
-          }}
-
-        >
-          <View style={{ alignSelf: "center" }}>
-            <Text style={styles.title}>{title}</Text>
-            <Text style={styles.name}>{name}</Text>
+        {/* Top Row */}
+        <View style={styles.topRow}>
+          <View style={styles.leftIcons}>
+            <TouchableOpacity
+              onPress={onPressNavigation}
+              style={styles.iconWrapper}
+            >
+              <Image source={Icons.dashboard_navigation} style={styles.icon} />
+            </TouchableOpacity>
+            <TouchableOpacity onPress={onBellPress} style={styles.iconWrapper}>
+              <Image source={Icons.dashboard_bell} style={styles.icon} />
+            </TouchableOpacity>
           </View>
-          <TouchableOpacity onPress={handleProfilePress}
-            style={{
-              top: 0,
-              bottom: 0,
-              justifyContent: "center",
-              flexDirection: "row",
-            }}
-          >
-            <Image source={Icons.dashboard_profile} style={styles.profile} />
-          </TouchableOpacity>
+
+          <View style={styles.rightUser}>
+            <View>
+              <Text style={styles.welcomeText}>Welcome</Text>
+              <Text style={styles.nameText}>{name}</Text>
+            </View>
+            <TouchableOpacity onPress={fetchUserProfile}>
+              <Image
+                source={Icons.dashboard_profile}
+                style={styles.profileImage}
+              />
+            </TouchableOpacity>
+          </View>
         </View>
-        {/* <View style={styles.nameView}>
-        <Text style={styles.title}>{title}</Text>
-        <Text style={styles.name}>{name}</Text>
-      </View>
-      <Image source={Icons.dashboard_profile} style={styles.profile} /> */}
+
+        {/* Search Bar */}
+        <View style={styles.searchBar}>
+          <Image source={Icons.search} style={styles.searchIcon} />
+          <TextInput
+            placeholder="Search for Services"
+            placeholderTextColor="#999"
+            style={styles.input}
+          />
+          <Image source={Icons.mic} style={styles.micIcon} />
+        </View>
       </View>
     </DropShadow>
   );
@@ -163,72 +142,86 @@ export default DashboardHeader;
 
 const styles = StyleSheet.create({
   headerContainer: {
-    flexDirection: "row",
-    paddingStart: 10,
-    // elevation: 10,
-    // ...Platform.select({
-    //   ios: {
-    //     shadowColor: "rgba(0, 0, 0, 0.3)", // rgba(0, 0, 0, 0.3) color
-    //     shadowOffset: { width: 0, height: 4 }, // x: 0, y: 4
-    //     shadowOpacity: 1, // Set opacity to full since rgba handles the transparency
-    //     shadowRadius: 3, // Blur radius 3
-    //   },
-    //   android: {
-    //     elevation: 1,
-    //     //backgroundColor: "#000000",
-    //     borderBottomColor: "rgba(0, 0, 0, 0.08)",
-    //     borderBottomWidth: 3,
-    //   },
-    // }),
-    alignItems: "flex-start",
-    borderBottomStartRadius: 10,
-    borderBottomEndRadius: 10,
-    paddingTop: 10,
-    height: 80,
     backgroundColor: color.bottomViewColor,
-    marginBottom: 10,
+    paddingTop: Platform.OS === "ios" ? 30 : 10,
+    paddingBottom: 20,
+    paddingHorizontal: 15,
+    borderBottomLeftRadius: 20,
+    borderBottomRightRadius: 20,
   },
-  iconContainer: {
-    // position: "absolute",
-    marginHorizontal: 7,
-    paddingTop: 20,
+  topRow: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+  },
+  leftIcons: {
+    flexDirection: "row",
+    alignItems: "center",
+  },
+  iconWrapper: {
+    marginRight: 12,
   },
   icon: {
-    width: ms(20),
-    height: ms(20),
+    width: 24,
+    height: 24,
   },
-  uhidText: {
-    color: color.white,
-    fontSize: ms(14),
-    justifyContent: "center",
-
+  badge: {
+    position: "absolute",
+    top: -6,
+    right: -6,
+    backgroundColor: "red",
+    borderRadius: 10,
+    paddingHorizontal: 5,
+    paddingVertical: 1,
+  },
+  badgeText: {
+    color: "#fff",
+    fontSize: 10,
     fontWeight: "bold",
   },
-  profile: {
-    alignSelf: "center",
-    width: 55,
-    height: 55,
+  rightUser: {
+    flexDirection: "row",
+    alignItems: "center",
   },
-  title: {
-    fontSize: ms(12),
-    marginStart: 10,
+  welcomeText: {
+    color: "white",
+    fontSize: 12,
+    textAlign: "right",
+  },
+  nameText: {
+    color: "white",
+    fontSize: 14,
+    fontWeight: "bold",
+    textAlign: "right",
+  },
+  profileImage: {
+    width: 40,
+    height: 40,
+    borderRadius: 20,
+    marginLeft: 10,
+  },
+  searchBar: {
+    marginTop: 15,
+    backgroundColor: "#fff",
+    borderRadius: 12,
+    flexDirection: "row",
+    alignItems: "center",
+    paddingHorizontal: 10,
+    height: 35,
+  },
+  searchIcon: {
+    width: 20,
+    height: 20,
     marginRight: 10,
-    textAlign: "center",
-    color: color.white,
   },
-  name: {
-    fontSize: ms(12),
-    marginStart: 10,
-    fontFamily: "bold",
-    textAlign: "center",
-    color: color.white,
+  micIcon: {
+    width: 20,
+    height: 20,
+    marginLeft: 10,
   },
-  nameView: {
-    marginStart: 10,
-    color: color.white,
-    alignSelf: "center",
-    position: "absolute",
-    end: 80,
+  input: {
+    flex: 1,
+    fontSize: 14,
   },
   shadowProp: {
     shadowColor: "#00000025",

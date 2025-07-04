@@ -3,7 +3,7 @@ import React from "react";
 import DropShadow from "react-native-drop-shadow";
 import { color } from "../assets/colors/Colors";
 import { ms, vs } from "react-native-size-matters";
-export default function HomeButton({ label, iconImg, onClickMenu, id }) {
+export default function HomeButton({ label, iconImg, onClickMenu, id ,imageheight, imagewidth}) {
   return (
     <TouchableOpacity
       activeOpacity={0.8}
@@ -34,14 +34,15 @@ export default function HomeButton({ label, iconImg, onClickMenu, id }) {
             borderRadius: 22,
             justifyContent: "center",
             alignItems: "center",
+            alignSelf: "center"
           }}
-        >
+        > 
           <Image
             source={iconImg}
             resizeMode="contain"
             style={{
-              height: ms(52),
-              width: ms(52),
+              height: ms(imageheight),
+              width: ms(imagewidth),
             }}
           />
         </View>
@@ -53,7 +54,7 @@ export default function HomeButton({ label, iconImg, onClickMenu, id }) {
           marginTop: 5,
           flexWrap: "wrap",
           fontFamily: "medium",
-          fontSize: ms(12),
+          fontSize: ms(14),
         }}
         numberOfLines={2}
       >
