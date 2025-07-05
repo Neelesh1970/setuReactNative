@@ -110,6 +110,8 @@ import { ReportScreen, ViewReportScreen } from "../Screens/Reports";
 import AgricultureNavigator from "../Screens/NewAgriculture/navigation/AgricultureNavigator";
 import TempleAartiScreen from "../Screens/Temple_Aarti/TempleAartiScreen";
 import AgricultureHomeScreen from "../Screens/NewAgriculture/AgricultureHomeScreen";
+import LiveAartiScreen from "../Screens/Temple_Aarti/LiveAartiscreen";
+import AartiDetailScreen from "../Screens/Temple_Aarti/AartiDetailScreen";
 
 const Stack = createStackNavigator();
 
@@ -1246,6 +1248,18 @@ export const StackNavigation = ({ navigation }) => {
           headerShown: false,
         }}
       />
+
+<Stack.Screen
+    name="LiveAartiScreen"
+    component={LiveAartiScreen}
+    options={{ title: 'Live Aarti' }}
+  />
+
+<Stack.Screen
+    name="AartiDetail"
+    component={AartiDetailScreen}
+    options={{ title: 'Aarti Details' }}
+  />
 
 <Stack.Screen
         name="AgricultureHomeScreen"
