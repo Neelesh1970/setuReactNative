@@ -315,7 +315,7 @@ export const Icons = {
   job_edit_language: require("../images/jobs/job_edit_language.png"),
   job_edit_cv: require("../images/jobs/job_edit_cv.png"),
   job_edit_profile_icon: require("../images/jobs/job_edit_profile_icon.png"),
-  abha_logo: require("../images/abhaLogo.png"),
+  abha_logo: require("../images/new_dashboard/Aabha.png"),
   // drug directory imgs
   drugImg1: require("../images/drug_directory/img1.png"),
 

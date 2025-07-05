@@ -112,7 +112,7 @@ const DashboardHeader = ({
           <View style={styles.rightUser}>
             <View>
               <Text style={styles.welcomeText}>Welcome</Text>
-              <Text style={styles.nameText}>{name}</Text>
+              {/* <Text style={styles.nameText}>{name}</Text> */}
             </View>
             <TouchableOpacity onPress={fetchUserProfile}>
               <Image
@@ -195,8 +195,8 @@ const styles = StyleSheet.create({
     textAlign: "right",
   },
   profileImage: {
-    width: 40,
-    height: 40,
+    width: 50,
+    height: 50,
     borderRadius: 20,
     marginLeft: 10,
   },

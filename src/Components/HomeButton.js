@@ -3,21 +3,25 @@ import React from "react";
 import DropShadow from "react-native-drop-shadow";
 import { color } from "../assets/colors/Colors";
 import { ms, vs } from "react-native-size-matters";
-export default function HomeButton({ label, iconImg, onClickMenu, id ,imageheight, imagewidth}) {
+export default function HomeButton({
+  label,
+  iconImg,
+  onClickMenu,
+  id,
+  imageheight,
+  imagewidth,
+}) {
   return (
     <TouchableOpacity
       activeOpacity={0.8}
       onPress={() => onClickMenu(id)}
-      style={{ justifyContent: "center", alignItems: "center", marginTop: 15 }}
+      style={{
+        justifyContent: "center",
+        alignItems: "center",
+        paddingVertical: 10,
+        width: "100%", // helpful for larger tap areas
+      }}
     >
-      {/* <DropShadow
-        style={{
-          shadowColor: "#00000030",
-          shadowOffset: { width: -2, height: -2 },
-          shadowOpacity: 0.2,
-          shadowRadius: 1,
-        }}
-      > */}
       <DropShadow
         style={{
           shadowColor: "#00000030",
@@ -34,25 +38,25 @@ export default function HomeButton({ label, iconImg, onClickMenu, id ,imageheigh
             borderRadius: 22,
             justifyContent: "center",
             alignItems: "center",
-            alignSelf: "center"
+            alignSelf: "center",
           }}
-        > 
+        >
           <Image
             source={iconImg}
             resizeMode="contain"
             style={{
               height: ms(imageheight),
               width: ms(imagewidth),
+              
             }}
           />
         </View>
       </DropShadow>
-      {/* </DropShadow> */}
+
       <Text
         style={{
           textAlign: "center",
-          marginTop: 5,
-          flexWrap: "wrap",
+          marginTop: 6,
           fontFamily: "medium",
           fontSize: ms(14),
         }}
