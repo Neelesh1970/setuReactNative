@@ -50,8 +50,8 @@ import CategoriesScreen from "../Screens/GovernmentSchemes/CategoriesScreen";
 import SchemeListScreen from "../Screens/GovernmentSchemes/SchemeListScreen";
 import StateSchemesList from "../Screens/GovernmentSchemes/StateSchemesList";
 import EligibleSchemesScreen from "../Screens/GovernmentSchemes/EligibleSchemesScreen";
-import SchemeDetailScreen from '../Screens/GovernmentSchemes/SchemeDetailScreen';
-import SchemeOverviewScreen from '../Screens/GovernmentSchemes/SchemeOverviewScreen';
+import SchemeDetailScreen from "../Screens/GovernmentSchemes/SchemeDetailScreen";
+import SchemeOverviewScreen from "../Screens/GovernmentSchemes/SchemeOverviewScreen";
 import HealthDataScreen from "../Screens/GovernmentSchemes/HealthDataScreen";
 
 import {
@@ -109,6 +109,13 @@ import { ReportScreen, ViewReportScreen } from "../Screens/Reports";
 import AgricultureNavigator from "../Screens/NewAgriculture/navigation/AgricultureNavigator";
 import TempleAartiScreen from "../Screens/Temple_Aarti/TempleAartiScreen";
 import AgricultureHomeScreen from "../Screens/NewAgriculture/AgricultureHomeScreen";
+import GymHomeScreen from "../Screens/Gym/screens/GymHomeScreen";
+import AnalyzeFoodScreen from "../Screens/Gym/screens/AnalyzeFoodScreen";
+import NutritionAdviceScreen from "../Screens/Gym/screens/NutritionAdviceScreen";
+import WorkoutPlanScreen from "../Screens/Gym/screens/WorkOutPlanScreen";
+import ExerciseDetailsScreen from "../Screens/Gym/screens/ExerciseDetailScreen";
+import BrowseExercisesScreen from "../Screens/Gym/screens/BrowseExerciseScreen";
+import WorkoutDetailScreen from "../Screens/Gym/screens/WorkOutDetailScreen";
 
 const Stack = createStackNavigator();
 
@@ -209,8 +216,7 @@ export const StackNavigation = ({ navigation }) => {
           headerShown: false,
         }}
       />
-      
-      
+
       <Stack.Screen
         name="GovernmentSchemes"
         component={GovernmentSchemesScreen}
@@ -247,9 +253,6 @@ export const StackNavigation = ({ navigation }) => {
         })}
       />
 
-
-    
-     
       <Stack.Screen
         name="SchemeOverview"
         component={SchemeOverviewScreen}
@@ -271,8 +274,6 @@ export const StackNavigation = ({ navigation }) => {
           headerShown: false,
         }}
       />
-      
-    
 
       <Stack.Screen
         name="HealthPackageCard"
@@ -1239,11 +1240,116 @@ export const StackNavigation = ({ navigation }) => {
         }}
       />
 
-<Stack.Screen
+      <Stack.Screen
         name="AgricultureHomeScreen"
         component={AgricultureHomeScreen}
         options={{
           headerShown: false,
+        }}
+      />
+
+      {/* Gym Screens */}
+      <Stack.Screen
+        name="GymHome"
+        component={GymHomeScreen}
+        options={{
+          headerShown: false,
+        }}
+      />
+      <Stack.Screen
+        name="AnalyzeFood"
+        component={AnalyzeFoodScreen}
+        options={{
+          headerStyle: {
+            backgroundColor: "#1C39BB",
+          },
+          headerTitleStyle: {
+            // fontSize: s(16),
+            color: "#fff",
+          },
+          headerTintColor: "#fff",
+          headerTitleAlign: "center",
+          // headerShown: false,
+        }}
+      />
+      <Stack.Screen
+        name="NutritionAdvice"
+        component={NutritionAdviceScreen}
+        options={{
+          headerStyle: {
+            backgroundColor: "#1C39BB",
+          },
+          headerTitleStyle: {
+            // fontSize: s(16),
+            color: "#fff",
+          },
+          headerTintColor: "#fff",
+          headerTitleAlign: "center",
+          // headerShown: false,
+        }}
+      />
+      <Stack.Screen
+        name="WorkoutPlan"
+        component={WorkoutPlanScreen}
+        options={{
+          headerStyle: {
+            backgroundColor: "#1C39BB",
+          },
+          headerTitleStyle: {
+            // fontSize: s(16),
+            color: "#fff",
+          },
+          headerTintColor: "#fff",
+          headerTitleAlign: "center",
+          // headerShown: false,
+        }}
+      />
+      <Stack.Screen
+        name="ExerciseDetails"
+        component={ExerciseDetailsScreen}
+        options={{
+          headerStyle: {
+            backgroundColor: "#1C39BB",
+          },
+          headerTitleStyle: {
+            // fontSize: s(16),
+            color: "#fff",
+          },
+          headerTintColor: "#fff",
+          headerTitleAlign: "center",
+          // headerShown: false,
+        }}
+      />
+      <Stack.Screen
+        name="BrowseExercises"
+        component={BrowseExercisesScreen}
+        options={{
+          headerStyle: {
+            backgroundColor: "#1C39BB",
+          },
+          headerTitleStyle: {
+            // fontSize: s(16),
+            color: "#fff",
+          },
+          headerTintColor: "#fff",
+          headerTitleAlign: "center",
+          // headerShown: false,
+        }}
+      />
+      <Stack.Screen
+        name="WorkOutDetails"
+        component={WorkoutDetailScreen}
+        options={{
+          headerStyle: {
+            backgroundColor: "#1C39BB",
+          },
+          headerTitleStyle: {
+            // fontSize: s(16),
+            color: "#fff",
+          },
+          headerTintColor: "#fff",
+          headerTitleAlign: "center",
+          // headerShown: false,
         }}
       />
     </Stack.Navigator>

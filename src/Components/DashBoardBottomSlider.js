@@ -31,14 +31,14 @@ export default function BottomSlider() {
       description:
         "Click to explore schemes, services, and updates from Maharashtra",
       image: Icons.dashboard_cm,
-      imagewidth: 100,
+      imagewidth: 90,
       imageheight: 100,
     },
     {
   id: 3,
   title: "Maharashtra State",
   subtitle: "Vikas Yatra",
-  description: "Click to explore Maharashtra's development programs and digital services",
+  description: "Click to explore Maharashtra's development ",
   image: Icons.dashboard_d_cm, // Make sure to add this image in your Icons.js
   imagewidth: 120,
   imageheight: 120,

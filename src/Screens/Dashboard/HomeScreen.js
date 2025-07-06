@@ -58,6 +58,8 @@ const HomeIcons = [
   { id: 22, iconImg: Icons.dashboard_digital_nurse, label: "Digital Nurse" },
   { id: 23, iconImg: Icons.dashboard_mental_health, label: "Mental Health" },
   { id: 19, iconImg: Icons.dashboard_drug_directory, label: "Drug Directory" },
+  { id: 5, iconImg: Icons.home_asha, label: "Asha" },
+
   { id: 4, iconImg: Icons.dashboard_insurance, label: "Insurance" },
   { id: 34, iconImg: Icons.dashboard_health_funding, label: "Health Funding" },
   {
@@ -76,7 +78,6 @@ const HomeIcons = [
 
   { id: 13, iconImg: Icons.home_eCart, label: "eCart" },
   { id: 8, iconImg: Icons.home_findJobs, label: "Jobs" },
-  { id: 5, iconImg: Icons.home_asha, label: "Asha" },
   { id: 21, iconImg: Icons.dashboard_kpo_bpo, label: "BPO/KPO" },
   { id: 24, iconImg: Icons.dashboard_eWealth, label: "eWealth" },
   { id: 25, iconImg: Icons.dashboard_health_loan, label: "Health Loan" },
@@ -87,7 +88,13 @@ const HomeIcons = [
   { id: 30, iconImg: Icons.dashboard_education, label: "Education" },
   { id: 31, iconImg: Icons.dashboard_my_pet, label: "My Pet" },
   { id: 18, iconImg: Icons.dashboard_agriculture, label: "Agriculture" },
-  { id: 32, iconImg: Icons.dashboard_ayush, label: "Ayush", imageheight: 50, imagewidth: 50 },
+  {
+    id: 32,
+    iconImg: Icons.dashboard_ayush,
+    label: "Ayush",
+    imageheight: 50,
+    imagewidth: 50,
+  },
   { id: 7, iconImg: Icons.dashboard_fitness, label: "Fitness" },
   { id: 33, iconImg: Icons.dashboard_games, label: "Games" },
 
@@ -128,11 +135,22 @@ export default function HomeScreen({ mainNavigation }) {
   const [username, setUsername] = useState(null);
   const [userName, setUserName] = useState(null);
 
-
-
   const iconSizes = {
+    32: { width: 100, height: 100 },
+    2: { width: 65, height: 65 },
+    23: { width: 85, height: 80 },
+    15: { width: 80, height: 80 },
+    6: { width: 80, height: 80 },
+    40: { width: 80, height: 80 },
+    19: { width: 80, height: 80 },
+    35: { width: 70, height: 70 },
+    7: { width: 80, height: 80 },
+    18: { width: 80, height: 80 },
+    37: { width: 80, height: 80 },
+    10: { width: 75, height: 75 },
+    22: { width: 80, height: 80 },
+    20: { width: 75, height: 75 },
 
-    32: { width: 80, height: 80 },
     // Add all relevant ids here with their manual sizes
   };
 
@@ -195,6 +213,8 @@ export default function HomeScreen({ mainNavigation }) {
       mainNavigation.navigate("Abha");
     } else if (index === 10) {
       mainNavigation.navigate("TempleAartiScreen");
+    } else if (index === 7) {
+      mainNavigation.navigate("GymHome");
     }
     // else {
     //   mainNavigation.navigate("DrugDirectoryHome");
@@ -209,73 +229,72 @@ export default function HomeScreen({ mainNavigation }) {
       numberOfElementsLastRow !== numColumns &&
       numberOfElementsLastRow !== 0
     ) {
-      data.push({ id: `blank - ${ numberOfElementsLastRow }`, value: null }); // Add a placeholder
-    numberOfElementsLastRow++;
-  }
+      data.push({ id: `blank - ${numberOfElementsLastRow}`, value: null }); // Add a placeholder
+      numberOfElementsLastRow++;
+    }
 
-  return data;
-};
+    return data;
+  };
 
-const renderHomeIcons = ({ item }) => {
-  if (item.value === null) {
-    return <View style={[styles.gridItem]} />;
-  }
+  const renderHomeIcons = ({ item }) => {
+    if (item.value === null) {
+      return <View style={[styles.gridItem]} />;
+    }
 
-  // Default size fallback if id not found
-  const { width = 55, height = 55 } = iconSizes[item.id] || {};
+    // Default size fallback if id not found
+    const { width = 55, height = 55 } = iconSizes[item.id] || {};
 
-  return (
-    <View style={styles.gridItem}>
-      <HomeButton
-        iconImg={item.iconImg}
-        label={item.label}
-        id={item.id}
-        imagewidth={width}
-        imageheight={height}
-        onClickMenu={OnMenuClick}
-      />
+    return (
+      <View style={styles.gridItem}>
+        <HomeButton
+          iconImg={item.iconImg}
+          label={item.label}
+          id={item.id}
+          imagewidth={width}
+          imageheight={height}
+          onClickMenu={OnMenuClick}
+        />
+      </View>
+    );
+  };
+
+  const pages = ["Page 1", "Page 2", "Page 3"];
+
+  const renderDots = () => (
+    <View style={styles.dotContainer}>
+      {Array.from({ length: numPages }).map((_, i) => (
+        <View
+          key={i}
+          style={[
+            styles.dot,
+            i === current ? styles.activeDot : styles.inactiveDot,
+          ]}
+        />
+      ))}
     </View>
   );
-};
 
-
-const pages = ["Page 1", "Page 2", "Page 3"];
-
-const renderDots = () => (
-  <View style={styles.dotContainer}>
-    {Array.from({ length: numPages }).map((_, i) => (
-      <View
-        key={i}
-        style={[
-          styles.dot,
-          i === current ? styles.activeDot : styles.inactiveDot,
-        ]}
-      />
-    ))}
-  </View>
-);
-
-return (
-  <View
-    style={{
-      flex: 1,
-      paddingBottom: ms(70),
-      backgroundColor: color.white,
-    }}
-  >
-    <DashboardHeader
-      title={"Welcome"}
-      name={userName}
-      onPressNavigation={() => {
-        // setSidebarVisible(true)
-        console.log("Main Navigation", mainNavigation);
-        navigation.toggleDrawer();
+  return (
+    <View
+      style={{
+        flex: 1,
+        paddingBottom: ms(70),
+        backgroundColor: color.white,
       }}
-    />
-    {/* {sidebarVisible && <CustomSidebar isVisible={sidebarVisible} onClose={() => setSidebarVisible(false)} />} */}
-    <StatusBar backgroundColor={color.editBlue} />
-    {/* <BottomSlider /> */}
-    {/* <PagerView
+    >
+      <DashboardHeader
+        title={"Welcome"}
+        name={userName}
+        onPressNavigation={() => {
+          // setSidebarVisible(true)
+          console.log("Main Navigation", mainNavigation);
+          navigation.toggleDrawer();
+        }}
+      />
+      {/* {sidebarVisible && <CustomSidebar isVisible={sidebarVisible} onClose={() => setSidebarVisible(false)} />} */}
+      <StatusBar backgroundColor={color.editBlue} />
+      {/* <BottomSlider /> */}
+      {/* <PagerView
         style={{ flex: 1, height: screenHeight - ms(300) }}
         initialPage={0}
         onLayout={(event) => {
@@ -311,22 +330,22 @@ return (
         {/* <View key="2">
           <Text>Second page</Text>
         </View> */}
-    {/* </PagerView> */}
+      {/* </PagerView> */}
 
-    <FlatList
-      ListHeaderComponent={<BottomSlider />}
-      data={formatData(HomeIcons, numberOfColumn)}
-      renderItem={renderHomeIcons}
-      keyExtractor={(item) => item.id.toString()}
-      numColumns={numberOfColumn}
-      columnWrapperStyle={{ justifyContent: "space-between" }}
-      contentContainerStyle={{
-        paddingHorizontal: 10,
-        paddingBottom: 20,
-      }}
-    />
+      <FlatList
+        ListHeaderComponent={<BottomSlider />}
+        data={formatData(HomeIcons, numberOfColumn)}
+        renderItem={renderHomeIcons}
+        keyExtractor={(item) => item.id.toString()}
+        numColumns={numberOfColumn}
+        columnWrapperStyle={{ justifyContent: "space-between" }}
+        contentContainerStyle={{
+          paddingHorizontal: 10,
+          paddingBottom: 20,
+        }}
+      />
 
-    {/* <PageIndicator
+      {/* <PageIndicator
         count={totalPages}
         current={current}
         variant="beads"
@@ -334,8 +353,8 @@ return (
         activeColor={color.black}
         style={{ alignSelf: "center", padding: 10 }}
       /> */}
-  </View>
-);
+    </View>
+  );
 }
 
 {

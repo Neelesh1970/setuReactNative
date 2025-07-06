@@ -93,7 +93,7 @@ export default function DashboardScreen({ navigation }) {
           style={{
             color: color.white,
             fontFamily: "medium",
-            fontSize: 11,
+            fontSize: 14,
             marginTop: 4,
           }}
         >
