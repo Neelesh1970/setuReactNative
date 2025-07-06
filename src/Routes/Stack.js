@@ -49,6 +49,7 @@ import GovernmentSchemesScreen from "../Screens/GovernmentSchemes/GovernmentSche
 import CategoriesScreen from "../Screens/GovernmentSchemes/CategoriesScreen";
 import SchemeListScreen from "../Screens/GovernmentSchemes/SchemeListScreen";
 import StateSchemesList from "../Screens/GovernmentSchemes/StateSchemesList";
+import CentralSchemesList from "../Screens/GovernmentSchemes/CentralSchemesList";
 import EligibleSchemesScreen from "../Screens/GovernmentSchemes/EligibleSchemesScreen";
 import SchemeDetailScreen from "../Screens/GovernmentSchemes/SchemeDetailScreen";
 import SchemeOverviewScreen from "../Screens/GovernmentSchemes/SchemeOverviewScreen";
@@ -109,6 +110,8 @@ import { ReportScreen, ViewReportScreen } from "../Screens/Reports";
 import AgricultureNavigator from "../Screens/NewAgriculture/navigation/AgricultureNavigator";
 import TempleAartiScreen from "../Screens/Temple_Aarti/TempleAartiScreen";
 import AgricultureHomeScreen from "../Screens/NewAgriculture/AgricultureHomeScreen";
+import LiveAartiScreen from "../Screens/Temple_Aarti/LiveAartiscreen";
+import AartiDetailScreen from "../Screens/Temple_Aarti/AartiDetailScreen";
 import GymHomeScreen from "../Screens/Gym/screens/GymHomeScreen";
 import AnalyzeFoodScreen from "../Screens/Gym/screens/AnalyzeFoodScreen";
 import NutritionAdviceScreen from "../Screens/Gym/screens/NutritionAdviceScreen";
@@ -227,6 +230,13 @@ export const StackNavigation = ({ navigation }) => {
       <Stack.Screen
         name="StateSchemesList"
         component={StateSchemesList}
+        options={{
+          headerShown: false,
+        }}
+      />
+      <Stack.Screen
+        name="CentralSchemesList"
+        component={CentralSchemesList}
         options={{
           headerShown: false,
         }}
@@ -1239,6 +1249,18 @@ export const StackNavigation = ({ navigation }) => {
           headerShown: false,
         }}
       />
+
+<Stack.Screen
+    name="LiveAartiScreen"
+    component={LiveAartiScreen}
+    options={{ title: 'Live Aarti' }}
+  />
+
+<Stack.Screen
+    name="AartiDetail"
+    component={AartiDetailScreen}
+    options={{ title: 'Aarti Details' }}
+  />
 
       <Stack.Screen
         name="AgricultureHomeScreen"
