@@ -11,6 +11,7 @@ import {
   ActivityIndicator
 } from 'react-native';
 import { useNavigation, useRoute } from '@react-navigation/native';
+import DashboardScreen from '../Dashboard/DashboardScreen';
 
 const { width } = Dimensions.get('window');
 // We'll use the design ratio to match your card height to screen width
@@ -129,7 +130,12 @@ const CategoriesScreen = () => {
           </TouchableOpacity>
         ))}
       </ScrollView>
+
+     {/* Bottom Navigation */}
+          <DashboardScreen  />
     </SafeAreaView>
+
+    
   );
 };
 
