@@ -119,6 +119,13 @@ import WorkoutPlanScreen from "../Screens/Gym/screens/WorkOutPlanScreen";
 import ExerciseDetailsScreen from "../Screens/Gym/screens/ExerciseDetailScreen";
 import BrowseExercisesScreen from "../Screens/Gym/screens/BrowseExerciseScreen";
 import WorkoutDetailScreen from "../Screens/Gym/screens/WorkOutDetailScreen";
+//import Dashboard from "../features/mentalHealth/screens/Dashboard";
+import SelfAssessment from "../features/mentalHealth/screens/SelfAssessment";
+import AssessmentRunner from "../features/mentalHealth/screens/AssessmentRunner";
+import AssessmentResults from "../features/mentalHealth/screens/AssessmentResults";
+import ActivityLog from "../features/mentalHealth/screens/ActivityLog";
+import MentalHealthHomeScreen from "../features/mentalHealth/screens/MentalHealthHomeScreen";
+import BookSpecialistScreen from "../features/mentalHealth/screens/BookSpecialistScreen";
 
 const Stack = createStackNavigator();
 
@@ -1372,6 +1379,92 @@ export const StackNavigation = ({ navigation }) => {
           headerTintColor: "#fff",
           headerTitleAlign: "center",
           // headerShown: false,
+        }}
+      />
+      {/* Mental Health Screens */}
+      <Stack.Screen
+        name="MentalHealth"
+        component={MentalHealthHomeScreen}
+        options={{
+          headerShown: false,
+        }}
+      />
+      <Stack.Screen
+        name="SelfAssessment"
+        component={SelfAssessment}
+        options={{
+          title: 'Self Assessment',
+          headerStyle: {
+            backgroundColor: '#1C39BB',
+          },
+          headerTitleStyle: {
+            color: '#fff',
+          },
+          headerTintColor: '#fff',
+          headerTitleAlign: 'center',
+        }}
+      />
+      <Stack.Screen
+        name="AssessmentRunner"
+        component={AssessmentRunner}
+        options={{
+          headerShown: true,
+          title: 'Assessment',
+          headerStyle: {
+            backgroundColor: '#1C39BB',
+          },
+          headerTitleStyle: {
+            color: '#fff',
+          },
+          headerTintColor: '#fff',
+          headerTitleAlign: 'center',
+        }}
+      />
+      <Stack.Screen
+        name="AssessmentResults"
+        component={AssessmentResults}
+        options={{
+          headerShown: true,
+          title: 'Assessment Results',
+          headerStyle: {
+            backgroundColor: '#1C39BB',
+          },
+          headerTitleStyle: {
+            color: '#fff',
+          },
+          headerTintColor: '#fff',
+          headerTitleAlign: 'center',
+        }}
+      />
+      <Stack.Screen
+        name="BookSpecialist"
+        component={BookSpecialistScreen}
+        options={{
+          headerShown: true,
+          title: 'BookSpecialist',
+          headerStyle: {
+            backgroundColor: '#1C39BB',
+          },
+          headerTitleStyle: {
+            color: '#fff',
+          },
+          headerTintColor: '#fff',
+          headerTitleAlign: 'center',
+        }}
+      />
+      <Stack.Screen
+        name="ActivityLog"
+        component={ActivityLog}
+        options={{
+          title: 'Activity Log',
+          headerStyle: {
+            backgroundColor: '#1C39BB',
+          },
+          headerTitleStyle: {
+            color: '#fff',
+          },
+          headerTintColor: '#fff',
+          headerTitleAlign: 'center',
         }}
       />
     </Stack.Navigator>
