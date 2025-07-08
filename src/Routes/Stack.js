@@ -119,6 +119,13 @@ import WorkoutPlanScreen from "../Screens/Gym/screens/WorkOutPlanScreen";
 import ExerciseDetailsScreen from "../Screens/Gym/screens/ExerciseDetailScreen";
 import BrowseExercisesScreen from "../Screens/Gym/screens/BrowseExerciseScreen";
 import WorkoutDetailScreen from "../Screens/Gym/screens/WorkOutDetailScreen";
+import AstrologyHome from "../Screens/Astrology/AstrologyHome";
+import ZodiacScreen from "../Screens/Astrology/ZodiacSign";
+import DailyHoroscopeScreen from "../Screens/Astrology/DailyHoroscopeScreen";
+import HomeScreen from "../Screens/Dashboard/HomeScreen";
+import Schedule from "../Screens/Dashboard/Schedule";
+import SetuChat from "../Screens/Dashboard/SetuChat";
+import BookSoilScreen from "../Screens/NewAgriculture/BookSoilScreen";
 
 const Stack = createStackNavigator();
 
@@ -1177,6 +1184,12 @@ export const StackNavigation = ({ navigation }) => {
         }}
       />
 
+      <Stack.Screen 
+      name="BookSoilTest"
+      component={BookSoilScreen}
+      options={{headerShown:false,}}
+      />
+
       <Stack.Screen
         name="GenCartScreen"
         component={GenCartScreen}
@@ -1374,6 +1387,77 @@ export const StackNavigation = ({ navigation }) => {
           // headerShown: false,
         }}
       />
+
+      {/* Astrology Screens  */} 
+
+      <Stack.Screen
+        name="AstrologyHome"
+        component={AstrologyHome}
+        options={{
+          headerStyle: {
+            backgroundColor: "#1C39BB",
+          },
+          headerTitleStyle: {
+            // fontSize: s(16),
+            color: "#fff",
+          },
+          headerTintColor: "#fff",
+          headerTitleAlign: "center",
+          // headerShown: false,
+        }}
+      />
+
+      <Stack.Screen
+        name="ZodiacSign"
+        component={ZodiacScreen}
+        options={{
+          headerStyle: {
+            backgroundColor: "#1C39BB",
+          },
+          headerTitleStyle: {
+            // fontSize: s(16),
+            color: "#fff",
+          },
+          headerTitle:"Astrology",
+          headerTintColor: "#fff",
+          headerTitleAlign: "center",
+          // headerShown: false,
+        }}
+      />
+      <Stack.Screen
+        name="DailyHoroscope"
+        component={DailyHoroscopeScreen}
+        options={{
+          headerStyle: {
+            backgroundColor: "#1C39BB",
+          },
+          headerTitleStyle: {
+            // fontSize: s(16),
+            color: "#fff",
+          },
+          headerTintColor: "#fff",
+          headerTitleAlign: "center",
+          // headerShown: false,
+        }}
+      />
+   
+        {/* screens for common bottom navigator  */}
+        <Stack.Screen 
+        name="Homescreen" 
+        component={HomeScreen}
+        options={{headerShown:false}}
+        />  
+        <Stack.Screen 
+        name="Schedule" 
+        component={Schedule}
+        options={{headerShown:false}}
+        />
+        <Stack.Screen 
+        name="Setuchat" 
+        component={SetuChat}
+        options={{headerShown:false}}
+        />
+
     </Stack.Navigator>
   );
 };
