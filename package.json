@@ -22,9 +22,13 @@
     "@react-navigation/native": "^7.0.14",
     "@react-navigation/stack": "^7.4.2",
     "@reduxjs/toolkit": "^2.5.1",
+    "@rjsf/core": "^5.24.12",
+    "@rjsf/utils": "^5.24.12",
+    "@rjsf/validator-ajv8": "^5.24.12",
     "@rneui/base": "^4.0.0-rc.8",
     "@rneui/themed": "^4.0.0-rc.8",
     "axios": "^1.7.9",
+    "fhir-kit-client": "^1.9.2",
     "i18next": "^24.2.2",
     "install": "^0.13.0",
     "moment": "^2.30.1",
@@ -34,6 +38,7 @@
     "react-i18next": "^15.4.0",
     "react-native": "0.77.0",
     "react-native-blob-util": "^0.21.2",
+    "react-native-chart-kit": "^6.12.0",
     "react-native-collapsible": "^1.6.2",
     "react-native-curved-bottom-bar": "^3.5.1",
     "react-native-device-info": "^14.0.4",
@@ -74,7 +79,8 @@
     "react-native-webview": "^13.13.2",
     "react-redux": "^9.2.0",
     "redux-thunk": "^3.1.0",
-    "rn-fetch-blob": "^0.12.0"
+    "rn-fetch-blob": "^0.12.0",
+    "victory-native": "^36.9.2"
   },
   "devDependencies": {
     "@babel/core": "^7.25.2",
