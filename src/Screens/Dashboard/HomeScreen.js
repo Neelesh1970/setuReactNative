@@ -215,8 +215,13 @@ export default function HomeScreen({ mainNavigation }) {
       mainNavigation.navigate("TempleAartiScreen");
     } else if (index === 7) {
       mainNavigation.navigate("GymHome");
+<<<<<<< HEAD
     } else if (index === 23) {
       mainNavigation.navigate("MentalHealth");
+=======
+    } else if (index === 27) {
+      mainNavigation.navigate("ZodiacSign");
+>>>>>>> f06cb271be299fc3a99083c523e567dd92cf0a23
     }
     // else {
     //   mainNavigation.navigate("DrugDirectoryHome");

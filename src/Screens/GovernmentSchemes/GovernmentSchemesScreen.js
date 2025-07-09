@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, Image, StyleSheet, TouchableOpacity, SafeAreaView, Dimensions, ScrollView, ActivityIndicator } from 'react-native';
 import DashboardScreen from '../Dashboard/DashboardScreen';
+import CommonBottomBar from '../../Routes/CommonTabbar';
 
 // Try to import the image directly
 let group1Image;
@@ -143,7 +144,8 @@ const GovernmentSchemesScreen = ({ navigation }) => {
         </TouchableOpacity>
       </ScrollView>
       {/* Bottom Navigation */}
-                <DashboardScreen/>
+              {/* <CommonBottomBar /> */}
+              {/* <DashboardScreen /> */}
     </SafeAreaView>
   );
 };
