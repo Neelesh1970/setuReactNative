@@ -415,7 +415,7 @@ const styles = StyleSheet.create({
   },
   button: {
     padding: 16,
-    borderRadius: 12,
+    borderRadius: 20,
     alignItems: 'center',
     marginTop: 8,
     marginBottom: 24,

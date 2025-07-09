@@ -106,7 +106,7 @@ const styles = StyleSheet.create({
     borderRadius: 25,
     alignItems: 'center',
     justifyContent: 'center',
-    elevation: 3,
+    // elevation: 1,
   },
   buttonText: {
     fontSize: 16,
