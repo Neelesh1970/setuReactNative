@@ -5,7 +5,7 @@ import { I18nextProvider } from 'react-i18next';
 import i18n from '../Utils/i18n';
 import { Provider } from 'react-redux';
 import store from '../Store';
-import Toast from 'react-native-toast-message';
+import Toast from 'react-native-toast-message';``
 import { DrawerNavigator } from './Drawer';
 
 const App = () => {

@@ -1278,7 +1278,8 @@ export const StackNavigation = ({ navigation }) => {
 <Stack.Screen
     name="AartiDetail"
     component={AartiDetailScreen}
-    options={{ title: 'Aarti Details' }}
+    options={{ title: 'Aarti Details'  , headerShown:false }}
+    
   />
 
       <Stack.Screen
