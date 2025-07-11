@@ -15,7 +15,7 @@ import Ionicons from "react-native-vector-icons/Ionicons";
 import Feather from "react-native-vector-icons/Feather";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 import { useNavigation } from "@react-navigation/native";
-import DashboardScreen from "../Dashboard/DashboardScreen";
+// Dashboard navigation is handled by the parent navigator
 import DropShadow from "react-native-drop-shadow";
 
 const { width } = Dimensions.get("window");
@@ -191,8 +191,6 @@ const AgricultureHomeScreen = ({ navigation }) => {
         </View>
       </ScrollView>
 
-      {/* Bottom Navigation */}
-      <DashboardScreen />
     </View>
   );
 };

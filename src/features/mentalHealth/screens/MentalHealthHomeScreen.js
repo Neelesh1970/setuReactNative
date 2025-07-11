@@ -20,7 +20,7 @@ export default function MentalHealthHomeScreen() {
 
   return (
     <View style={styles.container}>
-      <StatusBar barStyle="dark-content" backgroundColor="#FFFFFF" />
+      {/* <StatusBar barStyle="dark-content" backgroundColor="#FFFFFF" /> */}
       {/* Top graphic container */}
       <View style={styles.topContainer}>
         <View style={styles.graphicContainer}>

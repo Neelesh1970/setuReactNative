@@ -109,7 +109,6 @@ import { s, vs } from "react-native-size-matters";
 import { ReportScreen, ViewReportScreen } from "../Screens/Reports";
 import AgricultureNavigator from "../Screens/NewAgriculture/navigation/AgricultureNavigator";
 import TempleAartiScreen from "../Screens/Temple_Aarti/TempleAartiScreen";
-import AgricultureHomeScreen from "../Screens/NewAgriculture/AgricultureHomeScreen";
 import LiveAartiScreen from "../Screens/Temple_Aarti/LiveAartiscreen";
 import AartiDetailScreen from "../Screens/Temple_Aarti/AartiDetailScreen";
 import GymHomeScreen from "../Screens/Gym/screens/GymHomeScreen";
@@ -1284,7 +1283,7 @@ export const StackNavigation = ({ navigation }) => {
 
       <Stack.Screen
         name="AgricultureHomeScreen"
-        component={AgricultureHomeScreen}
+        component={AgricultureNavigator}
         options={{
           headerShown: false,
         }}
@@ -1409,9 +1408,9 @@ export const StackNavigation = ({ navigation }) => {
         headerStyle: {
           backgroundColor: '#1C39BB',
         },
-        headerTitleStyle: {
-          color: '#fff',
-        },
+        // headerTitleStyle: {
+        //   color: '#fff',
+        // },
         headerTintColor: '#fff',
         headerTitleAlign: 'center',
       }} /><Stack.Screen
