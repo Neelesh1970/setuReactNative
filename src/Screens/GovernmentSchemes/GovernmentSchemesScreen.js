@@ -1,7 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, Image, StyleSheet, TouchableOpacity, SafeAreaView, Dimensions, ScrollView, ActivityIndicator } from 'react-native';
+import Icon from 'react-native-vector-icons/Ionicons';
+import { useNavigation } from '@react-navigation/native';
 import DashboardScreen from '../Dashboard/DashboardScreen';
 import CommonBottomBar from '../../Routes/CommonTabbar';
+import { color } from '../../assets/colors/Colors';
 
 // Try to import the image directly
 let group1Image;
@@ -53,7 +56,8 @@ const ImageWithFallback = ({ source, style, ...props }) => {
 
 const { width } = Dimensions.get('window');
 
-const GovernmentSchemesScreen = ({ navigation }) => {
+const GovernmentSchemesScreen = ({ navigation: nav }) => {
+  const navigation = useNavigation();
   const [imageError, setImageError] = useState(false);
   
   useEffect(() => {
@@ -66,13 +70,19 @@ const GovernmentSchemesScreen = ({ navigation }) => {
         {/* Header */}
         <View style={styles.header}>
           <TouchableOpacity onPress={() => navigation.goBack()} style={styles.backButton}>
-            <Text style={styles.backIcon}>‹</Text>
+            <Icon name="arrow-back" size={24} color="white" />
           </TouchableOpacity>
           <Text style={styles.headerTitle}>Government Schemes</Text>
-          <View style={styles.docIconContainer}>
-            <Text style={styles.docIcon}>📄</Text>
-          </View>
+          <View style={styles.docIconContainer} />
         </View>
+
+        {/* Find Schemes Button */}
+        <TouchableOpacity 
+          style={styles.findSchemesButton}
+          onPress={() => navigation.navigate('EligibilityCriteria')}
+        >
+          <Text style={styles.findSchemesButtonText}>Find Schemes For You</Text>
+        </TouchableOpacity>
 
         {/* Schemes Banner */}
         <View style={styles.bannerImageContainer}>
@@ -162,21 +172,38 @@ const styles = StyleSheet.create({
   header: {
     flexDirection: 'row',
     alignItems: 'center',
-    padding: 8,
-    backgroundColor: '#FFFFFF',
-    borderBottomWidth: 0.3,
+    padding: 16,
+    backgroundColor: color.bottomViewColor,
+    borderBottomWidth: 1,
     borderBottomColor: '#e0e0e0',
+  },
+  findSchemesButton: {
+    backgroundColor: color.bottomViewColor,
+    padding: 15,
+    margin: 16,
+    borderRadius: 15,
+    alignItems: 'center',
+    // elevation: 2,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+  },
+  findSchemesButtonText: {
+    color: 'white',
+    fontSize: 16,
+    fontWeight: 'bold',
   },
   backButton: {
     padding: 5,
   },
-  backIcon: {
-    fontSize: 30,
-    color: '#000000',
+  backButton: {
+    padding: 5,
+    marginRight: 10,
   },
   headerTitle: {
     flex: 1,
-    color: '#000000',
+    color: 'white',
     fontSize: 18,
     fontWeight: '600',
     textAlign: 'center',
@@ -246,7 +273,7 @@ const styles = StyleSheet.create({
     marginTop: 20,
     marginBottom: 15,
     padding: 0,
-    elevation: 3,
+    elevation: 0,
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.1,
@@ -278,7 +305,7 @@ const styles = StyleSheet.create({
     marginTop: 15,
     marginBottom: 15,
     padding: 0,
-    elevation: 3,
+    elevation: 0,
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.1,
