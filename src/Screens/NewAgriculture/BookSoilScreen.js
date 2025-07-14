@@ -11,7 +11,9 @@ import {
   ImageBackground,
 } from "react-native";
 import DropShadow from "react-native-drop-shadow";
+
 import Ionicons from "react-native-vector-icons/Ionicons";
+import { color } from "../../assets/colors/Colors";
 
 const BookSoilScreen = () => {
   const navigation = useNavigation();
@@ -21,23 +23,23 @@ const BookSoilScreen = () => {
   };
   return (
     <View style={styles.container}>
-      <StatusBar barStyle="dark-content" backgroundColor="#F3F8EF" />
+      {/* <StatusBar barStyle="dark-content" backgroundColor="#F3F8EF" /> */}
 
       {/* Header */}
       <View style={styles.header}>
         <TouchableOpacity onPress={handleBack}>
-          <Ionicons name="arrow-back" size={24} color="#3C5F2D" />
+          <Ionicons name="arrow-back" size={24} color="#fff" />
         </TouchableOpacity>
         <Text style={styles.headerTitle}>Agriculture</Text>
         <View style={styles.headerIcons}>
           <TouchableOpacity style={styles.iconButton}>
-            <Ionicons name="document-text-outline" size={22} color="#333" />
+            <Ionicons name="document-text-outline" size={22} color="#fff" />
           </TouchableOpacity>
           <TouchableOpacity style={styles.iconButton}>
-            <Ionicons name="search-outline" size={22} color="#333" />
+            <Ionicons name="search-outline" size={22} color="#fff" />
           </TouchableOpacity>
           <TouchableOpacity style={styles.iconButton}>
-            <Ionicons name="cart-outline" size={22} color="#333" />
+            <Ionicons name="cart-outline" size={22} color="#fff" />
           </TouchableOpacity>
         </View>
       </View>
@@ -104,21 +106,23 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#F3F8EF",
-    paddingTop: 20,
+    // paddingTop: 20,
   },
   header: {
     flexDirection: "row",
     alignItems: "center",
     paddingHorizontal: 16,
     marginBottom: 10,
+    backgroundColor: color.bottomViewColor
   },
   headerTitle: {
     flex: 1,
     fontSize: 20,
     fontWeight: "bold",
     marginLeft: 10,
-    color: "#3C5F2D",
+    color: "#fff",
     textAlign: "center",
+    padding:20
   },
   headerIcons: {
     flexDirection: "row",
