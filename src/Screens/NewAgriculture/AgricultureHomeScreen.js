@@ -17,12 +17,20 @@ import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityI
 import { useNavigation } from "@react-navigation/native";
 // Dashboard navigation is handled by the parent navigator
 import DropShadow from "react-native-drop-shadow";
+import { color } from "../../assets/colors/Colors";
 
 const { width } = Dimensions.get("window");
 const BANNER_HEIGHT = 250;
 
-const AgricultureHomeScreen = ({ navigation }) => {
+const AgricultureHomeScreen = () => {
   const [activeTab, setActiveTab] = useState("all");
+
+  const navigation = useNavigation();
+
+  const handleBack = () => {
+    navigation.goBack();
+  }
+
   // Navigation handlers for bottom tabs
   const navigateToScreen = (screenName) => {
     if (screenName === "Dashboard") {
@@ -63,8 +71,8 @@ const AgricultureHomeScreen = ({ navigation }) => {
     <View style={styles.container}>
       {/* Header */}
       <View style={styles.header}>
-        <TouchableOpacity>
-          <Ionicons name="arrow-back" size={24} color="#333" />
+        <TouchableOpacity onPress={handleBack}>
+          <Ionicons name="arrow-back" size={24} color="#fff" />
         </TouchableOpacity>
         <Text style={styles.headerTitle}>Agriculture</Text>
         <View style={styles.headerIcons}>
@@ -203,7 +211,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     padding: 12,
-    backgroundColor: "#fff",
+    backgroundColor: color.bottomViewColor,
     borderBottomWidth: 1,
     borderBottomColor: "#eee",
   },
@@ -212,8 +220,8 @@ const styles = StyleSheet.create({
     textAlign: "center",
     fontSize: 26,
     fontWeight: "bold",
-    color: "#33522B",
-    marginLeft: -24, // To center the title accounting for the back button
+    color: "#fff",
+    // marginLeft: 24, // To center the title accounting for the back button
   },
   headerIcons: {
     flexDirection: "row",
