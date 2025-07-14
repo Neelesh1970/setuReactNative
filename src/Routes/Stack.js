@@ -54,6 +54,7 @@ import EligibleSchemesScreen from "../Screens/GovernmentSchemes/EligibleSchemesS
 import SchemeDetailScreen from "../Screens/GovernmentSchemes/SchemeDetailScreen";
 import SchemeOverviewScreen from "../Screens/GovernmentSchemes/SchemeOverviewScreen";
 import HealthDataScreen from "../Screens/GovernmentSchemes/HealthDataScreen";
+import EligibilityCriteriaScreen from "../Screens/GovernmentSchemes/EligibilityCriteriaScreen";
 
 import {
   DrugDirectoryAtoZ,
@@ -93,6 +94,7 @@ import AgriOrderSuccess from "../Screens/Agro/AgriOrderSuccess";
 import AgriAppointmentsList from "../Screens/Agriculture/Orderlisting/AgriOrderListing";
 import NewChangePassword from "../Screens/Dashboard/BookTest/changepassword";
 import EditUserProfile from "../Screens/Dashboard/BookTest/EditUserProfile";
+import StateSelectionScreen from "../Screens/GovernmentSchemes/StateSelectionScreen";
 
 // import AgriPickupSlot from "../Screens/Agriculture/AgriculturePage/AgriPickupSlot";
 
@@ -232,7 +234,6 @@ export const StackNavigation = ({ navigation }) => {
           headerShown: false,
         }}
       />
-
       <Stack.Screen
         name="GovernmentSchemes"
         component={GovernmentSchemesScreen}
@@ -288,6 +289,13 @@ export const StackNavigation = ({ navigation }) => {
         component={HealthDataScreen}
         options={{
           headerShown: false,
+        }}
+      />
+      <Stack.Screen
+        name="EligibilityCriteria"
+        component={EligibilityCriteriaScreen}
+        options={{
+          headerShown: false
         }}
       />
       <Stack.Screen
@@ -474,7 +482,13 @@ export const StackNavigation = ({ navigation }) => {
           headerShown: false,
         }}
       />
-
+      <Stack.Screen 
+        name="StateSelection" 
+        component={StateSelectionScreen}
+        options={{
+          headerShown: false
+        }}
+      />
       <Stack.Screen
         name="JobHome"
         component={JobHome}
