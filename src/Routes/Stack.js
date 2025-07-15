@@ -134,6 +134,13 @@ import HomeScreen from "../Screens/Dashboard/HomeScreen";
 import Schedule from "../Screens/Dashboard/Schedule";
 import SetuChat from "../Screens/Dashboard/SetuChat";
 import BookSoilScreen from "../Screens/NewAgriculture/BookSoilScreen";
+import RegistrationStep1 from "../Screens/Matrimony/Registration1";
+import AboutYouScreen from "../Screens/Matrimony/Registrarion2";
+import Step3Screen from "../Screens/Matrimony/Registration3";
+import FilterScreen from "../Screens/Matrimony/FilterScreen";
+import ProfileDetailScreen from "../Screens/Matrimony/ProfileDetailScreen";
+import ChatsScreen from "../Screens/Matrimony/ChatScreen";
+import MatriBottomTabs from "../Screens/Matrimony/navigation/MatriBottomTab";
 
 const Stack = createStackNavigator();
 
@@ -295,7 +302,7 @@ export const StackNavigation = ({ navigation }) => {
         name="EligibilityCriteria"
         component={EligibilityCriteriaScreen}
         options={{
-          headerShown: false
+          headerShown: false,
         }}
       />
       <Stack.Screen
@@ -482,11 +489,11 @@ export const StackNavigation = ({ navigation }) => {
           headerShown: false,
         }}
       />
-      <Stack.Screen 
-        name="StateSelection" 
+      <Stack.Screen
+        name="StateSelection"
         component={StateSelectionScreen}
         options={{
-          headerShown: false
+          headerShown: false,
         }}
       />
       <Stack.Screen
@@ -1204,10 +1211,10 @@ export const StackNavigation = ({ navigation }) => {
         }}
       />
 
-      <Stack.Screen 
-      name="BookSoilTest"
-      component={BookSoilScreen}
-      options={{headerShown:false,}}
+      <Stack.Screen
+        name="BookSoilTest"
+        component={BookSoilScreen}
+        options={{ headerShown: false }}
       />
 
       <Stack.Screen
@@ -1283,18 +1290,17 @@ export const StackNavigation = ({ navigation }) => {
         }}
       />
 
-<Stack.Screen
-    name="LiveAartiScreen"
-    component={LiveAartiScreen}
-    options={{ title: 'Live Aarti' }}
-  />
+      <Stack.Screen
+        name="LiveAartiScreen"
+        component={LiveAartiScreen}
+        options={{ title: "Live Aarti" }}
+      />
 
-<Stack.Screen
-    name="AartiDetail"
-    component={AartiDetailScreen}
-    options={{ title: 'Aarti Details'  , headerShown:false }}
-    
-  />
+      <Stack.Screen
+        name="AartiDetail"
+        component={AartiDetailScreen}
+        options={{ title: "Aarti Details", headerShown: false }}
+      />
 
       <Stack.Screen
         name="AgricultureHomeScreen"
@@ -1410,83 +1416,95 @@ export const StackNavigation = ({ navigation }) => {
       />
 
       {/* Mental Health Screens */}
-      <><Stack.Screen
-    name="MentalHealth"
-    component={MentalHealthHomeScreen}
-    options={{
-      headerShown: false,
-    }} /><Stack.Screen
-      name="SelfAssessment"
-      component={SelfAssessment}
-      options={{
-        title: 'Self Assessment',
-        headerStyle: {
-          backgroundColor: '#1C39BB',
-        },
-        // headerTitleStyle: {
-        //   color: '#fff',
-        // },
-        headerTintColor: '#fff',
-        headerTitleAlign: 'center',
-      }} /><Stack.Screen
-      name="AssessmentRunner"
-      component={AssessmentRunner}
-      options={{
-        headerShown: true,
-        title: 'Assessment',
-        headerStyle: {
-          backgroundColor: '#1C39BB',
-        },
-        headerTitleStyle: {
-          color: '#fff',
-        },
-        headerTintColor: '#fff',
-        headerTitleAlign: 'center',
-      }} /><Stack.Screen
-      name="AssessmentResults"
-      component={AssessmentResults}
-      options={{
-        headerShown: true,
-        title: 'Assessment Results',
-        headerStyle: {
-          backgroundColor: '#1C39BB',
-        },
-        headerTitleStyle: {
-          color: '#fff',
-        },
-        headerTintColor: '#fff',
-        headerTitleAlign: 'center',
-      }} /><Stack.Screen
-      name="BookSpecialist"
-      component={BookSpecialistScreen}
-      options={{
-        headerShown: true,
-        title: 'BookSpecialist',
-        headerStyle: {
-          backgroundColor: '#1C39BB',
-        },
-        headerTitleStyle: {
-          color: '#fff',
-        },
-        headerTintColor: '#fff',
-        headerTitleAlign: 'center',
-      }} /><Stack.Screen
-      name="ActivityLog"
-      component={ActivityLog}
-      options={{
-        title: 'Activity Log',
-        headerStyle: {
-          backgroundColor: '#1C39BB',
-        },
-        headerTitleStyle: {
-          color: '#fff',
-        },
-        headerTintColor: '#fff',
-        headerTitleAlign: 'center',
-      }} /></>
+      <>
+        <Stack.Screen
+          name="MentalHealth"
+          component={MentalHealthHomeScreen}
+          options={{
+            headerShown: false,
+          }}
+        />
+        <Stack.Screen
+          name="SelfAssessment"
+          component={SelfAssessment}
+          options={{
+            title: "Self Assessment",
+            headerStyle: {
+              backgroundColor: "#1C39BB",
+            },
+            // headerTitleStyle: {
+            //   color: '#fff',
+            // },
+            headerTintColor: "#fff",
+            headerTitleAlign: "center",
+          }}
+        />
+        <Stack.Screen
+          name="AssessmentRunner"
+          component={AssessmentRunner}
+          options={{
+            headerShown: true,
+            title: "Assessment",
+            headerStyle: {
+              backgroundColor: "#1C39BB",
+            },
+            headerTitleStyle: {
+              color: "#fff",
+            },
+            headerTintColor: "#fff",
+            headerTitleAlign: "center",
+          }}
+        />
+        <Stack.Screen
+          name="AssessmentResults"
+          component={AssessmentResults}
+          options={{
+            headerShown: true,
+            title: "Assessment Results",
+            headerStyle: {
+              backgroundColor: "#1C39BB",
+            },
+            headerTitleStyle: {
+              color: "#fff",
+            },
+            headerTintColor: "#fff",
+            headerTitleAlign: "center",
+          }}
+        />
+        <Stack.Screen
+          name="BookSpecialist"
+          component={BookSpecialistScreen}
+          options={{
+            headerShown: true,
+            title: "BookSpecialist",
+            headerStyle: {
+              backgroundColor: "#1C39BB",
+            },
+            headerTitleStyle: {
+              color: "#fff",
+            },
+            headerTintColor: "#fff",
+            headerTitleAlign: "center",
+          }}
+        />
+        <Stack.Screen
+          name="ActivityLog"
+          component={ActivityLog}
+          options={{
+            title: "Activity Log",
+            headerStyle: {
+              backgroundColor: "#1C39BB",
+            },
+            headerTitleStyle: {
+              color: "#fff",
+            },
+            headerTintColor: "#fff",
+            headerTitleAlign: "center",
+          }}
+        />
+      </>
 
-
-      {/* Astrology Screens  */} 
+      {/* Astrology Screens  */}
 
       <Stack.Screen
         name="AstrologyHome"
@@ -1516,7 +1534,7 @@ export const StackNavigation = ({ navigation }) => {
             // fontSize: s(16),
             color: "#fff",
           },
-          headerTitle:"Astrology",
+          headerTitle: "Astrology",
           headerTintColor: "#fff",
           headerTitleAlign: "center",
           // headerShown: false,
@@ -1538,23 +1556,62 @@ export const StackNavigation = ({ navigation }) => {
           // headerShown: false,
         }}
       />
-   
-        {/* screens for common bottom navigator  */}
-        <Stack.Screen 
-        name="Homescreen" 
+
+      {/* screens for common bottom navigator  */}
+      <Stack.Screen
+        name="Homescreen"
         component={HomeScreen}
-        options={{headerShown:false}}
-        />  
-        <Stack.Screen 
-        name="Schedule" 
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name="Schedule"
         component={Schedule}
-        options={{headerShown:false}}
-        />
-        <Stack.Screen 
-        name="Setuchat" 
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name="Setuchat"
         component={SetuChat}
-        options={{headerShown:false}}
-        />
+        options={{ headerShown: false }}
+      />
+
+      {/* screens for Matrimony */}
+
+      <Stack.Screen
+        name="Register1"
+        component={RegistrationStep1}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name="Register2"
+        component={AboutYouScreen}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name="Register3"
+        component={Step3Screen}
+        options={{ headerShown: false }}
+      />
+       <Stack.Screen
+        name="FilterScreen"
+        component={FilterScreen}
+        options={{ headerShown: false }}
+      />
+      {/* <Stack.Screen
+        name="ProfileDetailScreen"
+        component={ProfileDetailScreen}
+        options={{ headerShown: false }}
+      />
+       <Stack.Screen
+        name="ChatScreen"
+        component={ChatsScreen}
+        options={{ headerShown: false }}
+      /> */}
+     <Stack.Screen
+        name="MatriBottomTab"
+        component={MatriBottomTabs}
+        options={{ headerShown: false }}
+      />
+
     </Stack.Navigator>
   );
 };
