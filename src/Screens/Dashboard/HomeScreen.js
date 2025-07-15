@@ -219,6 +219,8 @@ export default function HomeScreen({ mainNavigation }) {
       mainNavigation.navigate("MentalHealth");
     } else if (index === 27) {
       mainNavigation.navigate("ZodiacSign");
+    } else if (index === 28) {
+      mainNavigation.navigate("Register1")
     }
     // else {
     //   mainNavigation.navigate("DrugDirectoryHome");
