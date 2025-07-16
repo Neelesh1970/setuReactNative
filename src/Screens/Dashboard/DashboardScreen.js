@@ -138,7 +138,7 @@ export default function DashboardScreen({ navigation }) {
             <Animated.View style={styles.btnCircleUp}>
               <TouchableOpacity
                 style={styles.button}
-                onPress={() => navigation.navigate("Emergency")}
+                onPress={() => navigation.navigate("SosHome")}
               >
                 <Text
                   style={{ color: "white", fontWeight: "bold", fontSize: 16 }}
