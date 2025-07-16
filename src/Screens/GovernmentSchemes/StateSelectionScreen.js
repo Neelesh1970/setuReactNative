@@ -9,6 +9,7 @@ import {
 import { Picker } from '@react-native-picker/picker';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { useNavigation } from '@react-navigation/native';
+import { Alert } from 'react-native';
 
 const StateSelectionScreen = ({ route }) => {
   const navigation = useNavigation();
@@ -26,7 +27,15 @@ const StateSelectionScreen = ({ route }) => {
   ];
 
   const onContinue = () => {
-    navigation.navigate('SchemesList', {
+    if (!selectedState) {
+      Alert.alert('Required', 'Please select your state');
+      return;
+    }
+    if (!residence) {
+      Alert.alert('Required', 'Please select where you currently live');
+      return;
+    }
+    navigation.navigate('CasteSelection', {
       selectedState,
       residence,
       ...route.params
@@ -94,7 +103,7 @@ const StateSelectionScreen = ({ route }) => {
                 styles.chip,
                 residence === option && styles.chipSelected
               ]}
-              onPress={() => setResidence(option)}
+              onPress={() => setResidence(residence === option ? '' : option)}
             >
               <Text
                 style={[
@@ -116,14 +125,23 @@ const StateSelectionScreen = ({ route }) => {
             styles.continue,
             (!selectedState || !residence) && styles.continueDisabled
           ]}
-          disabled={!selectedState || !residence}
           onPress={onContinue}
         >
           <Text style={styles.continueText}>Continue →</Text>
         </TouchableOpacity>
 
-        <TouchableOpacity onPress={onReset} style={{ marginTop: 12 }}>
-          <Text style={styles.reset}>⟲ Start Over or Reset All</Text>
+        <TouchableOpacity 
+          onPress={onReset} 
+          style={[
+            styles.resetButton,
+            !selectedState && styles.resetButtonDisabled
+          ]}
+          disabled={!selectedState}
+        >
+          <Text style={[
+            styles.reset,
+            !selectedState && styles.resetButtonTextDisabled
+          ]}>⟲ Start Over or Reset All</Text>
         </TouchableOpacity>
       </View>
     </SafeAreaView>
@@ -200,15 +218,16 @@ const styles = StyleSheet.create({
     borderColor: '#E0E0E0',
     borderRadius: 8,
     alignItems: 'center',
+    justifyContent: 'center',
     backgroundColor: '#F5F5F5',
   },
   chipSelected: {
-    backgroundColor: '#E8F5E9',
-    borderColor: '#07C168',
+    // backgroundColor: '#1C39BB',
+    borderColor: '#1C39BB',
   },
   chipText: { fontSize: 16, color: '#000' },
   chipTextSelected: {
-    color: '#07C168',
+    color: '#333',
     fontWeight: '600',
   },
 
@@ -218,18 +237,31 @@ const styles = StyleSheet.create({
     borderColor: '#F0F0F0',
   },
   continue: {
-    backgroundColor: '#07C168',
-    paddingVertical: 14,
+    backgroundColor: '#1C39BB',
+    padding: 16,
     borderRadius: 8,
     alignItems: 'center',
   },
-  continueDisabled: { backgroundColor: '#BDBDBD' },
+  continueDisabled: {
+    backgroundColor: '#a0a0a0',
+  },
   continueText: { color: '#fff', fontSize: 18, fontWeight: '600' },
 
   reset: {
-    color: '#757575',
-    fontSize: 15,
+    color: '#1C39BB',
     textAlign: 'center',
+    marginTop: 8,
+    fontSize: 16,
+  },
+  resetButton: {
+    marginTop: 12,
+    alignSelf: 'center',
+  },
+  resetButtonTextDisabled: {
+    color: '#CCCCCC',
+  },
+  resetButtonDisabled: {
+    opacity: 0.5,
   },
   progressDots: {
     flexDirection: 'row',

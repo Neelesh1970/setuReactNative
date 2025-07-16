@@ -82,6 +82,7 @@ const GovernmentSchemesScreen = ({ navigation: nav }) => {
           onPress={() => navigation.navigate('EligibilityCriteria')}
         >
           <Text style={styles.findSchemesButtonText}>Find Schemes For You</Text>
+          <Icon name="arrow-forward" size={20} color="white" style={styles.arrowIcon} />
         </TouchableOpacity>
 
         {/* Schemes Banner */}
@@ -193,6 +194,10 @@ const styles = StyleSheet.create({
     color: 'white',
     fontSize: 16,
     fontWeight: 'bold',
+    marginRight: 8,
+  },
+  arrowIcon: {
+    marginLeft: 4,
   },
   backButton: {
     padding: 5,
