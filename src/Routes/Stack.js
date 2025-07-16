@@ -141,6 +141,7 @@ import FilterScreen from "../Screens/Matrimony/FilterScreen";
 import ProfileDetailScreen from "../Screens/Matrimony/ProfileDetailScreen";
 import ChatsScreen from "../Screens/Matrimony/ChatScreen";
 import MatriBottomTabs from "../Screens/Matrimony/navigation/MatriBottomTab";
+import { Logs, RegisteredContacts, SosAddContact, SosHome, SosPersonalInformation, SosPlan, SosSettings } from "../Screens/SOS";
 
 const Stack = createStackNavigator();
 
@@ -1610,6 +1611,58 @@ export const StackNavigation = ({ navigation }) => {
         name="MatriBottomTab"
         component={MatriBottomTabs}
         options={{ headerShown: false }}
+      />
+
+
+        {/* SOS Screens */}
+      <Stack.Screen
+        name="SosHome"
+        component={SosHome}
+        options={{
+          headerShown: false,
+        }}
+      />
+      <Stack.Screen
+        name="RegisteredContacts"
+        component={RegisteredContacts}
+        options={{
+          headerShown: false,
+        }}
+      />
+      <Stack.Screen
+        name="SosPersonalInformation"
+        component={SosPersonalInformation}
+        options={{
+          headerShown: false,
+        }}
+      />
+      <Stack.Screen
+        name="Logs"
+        component={Logs}
+        options={{
+          headerShown: false,
+        }}
+      />
+      <Stack.Screen
+        name="SosSettings"
+        component={SosSettings}
+        options={{
+          headerShown: false,
+        }}
+      />
+      <Stack.Screen
+        name="SosPlan"
+        component={SosPlan}
+        options={{
+          headerShown: false,
+        }}
+      />
+      <Stack.Screen
+        name="SosAddContact"
+        component={SosAddContact}
+        options={{
+          headerShown: false,
+        }}
       />
 
     </Stack.Navigator>
