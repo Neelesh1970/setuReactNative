@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, SafeAreaView, ScrollView, Dimensions } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity, SafeAreaView, ScrollView, Dimensions, Alert } from 'react-native';
 import { Picker } from '@react-native-picker/picker';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { useNavigation } from '@react-navigation/native';
@@ -9,7 +9,7 @@ const { width } = Dimensions.get('window');
 
 const EligibilityCriteriaScreen = () => {
   const navigation = useNavigation();
-  const [selectedGender, setSelectedGender] = useState('Male');
+  const [selectedGender, setSelectedGender] = useState('');
   const [showAgePicker, setShowAgePicker] = useState(false);
 
 
@@ -56,7 +56,7 @@ const EligibilityCriteriaScreen = () => {
                   styles.identityOption,
                   selectedGender === gender.id && styles.selectedIdentityOption
                 ]}
-                onPress={() => setSelectedGender(gender.id)}
+                onPress={() => setSelectedGender(selectedGender === gender.id ? '' : gender.id)}
               >
                 <Text style={styles.identityEmoji}>{gender.emoji}</Text>
                 <Text style={[
@@ -109,25 +109,38 @@ const EligibilityCriteriaScreen = () => {
             selectedAge && styles.continueButtonActive
           ]}
           onPress={() => {
-            if (selectedAge) {
-              navigation.navigate('StateSelection', {
-                selectedAge,
-                selectedGender
-              });
+            if (!selectedGender) {
+              Alert.alert('Required', 'Please select your gender');
+              return;
             }
+            if (!selectedAge) {
+              Alert.alert('Required', 'Please select your age');
+              return;
+            }
+            navigation.navigate('StateSelection', {
+              selectedAge,
+              selectedGender
+            });
           }}
         >
           <Text style={styles.continueButtonText}>Continue →</Text>
         </TouchableOpacity>
         
         <TouchableOpacity 
-          style={styles.resetButton}
+          style={[
+            styles.resetButton,
+            (!selectedGender && !selectedAge) && styles.resetButtonDisabled
+          ]}
           onPress={() => {
-            setSelectedGender('Male');
-            setSelectedAge('');
+            setSelectedGender('');
+            setSelectedAge(null);
           }}
+          disabled={!selectedGender && !selectedAge}
         >
-          <Text style={styles.resetButtonText}>Start Over or Reset All</Text>
+          <Text style={[
+            styles.resetButtonText,
+            (!selectedGender && !selectedAge) && styles.resetButtonTextDisabled
+          ]}>⟲ Start Over or Reset All</Text>
         </TouchableOpacity>
       </View>
     </SafeAreaView>
@@ -213,28 +226,28 @@ const styles = StyleSheet.create({
   },
   identityOption: {
     flex: 1,
-    alignItems: 'center',
     padding: 15,
+    margin: 5,
     borderRadius: 10,
-    backgroundColor: '#fff',
     borderWidth: 1,
-    borderColor: '#e0e0e0',
-    marginHorizontal: 5,
+    borderColor: '#E0E0E0',
+    alignItems: 'center',
+    backgroundColor: '#fff',
   },
   selectedIdentityOption: {
-    backgroundColor: '#E8F5E9',
-    borderColor: '#4CAF50',
+    // backgroundColor: '#1C39BB',
+    borderColor: '#1C39BB',
   },
   identityEmoji: {
     fontSize: 24,
     marginBottom: 5,
   },
   identityText: {
-    fontSize: 14,
-    color: '#666',
+    fontSize: 16,
+    color: '#333',
   },
   selectedIdentityText: {
-    color: '#2E7D32',
+    color: '#333',
     fontWeight: '600',
   },
   pickerContainer: {
@@ -269,28 +282,43 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
   },
   continueButton: {
-    backgroundColor: '#BDBDBD',
+    backgroundColor: '#1C39BB',
+    padding: 16,
     borderRadius: 8,
-    paddingVertical: 14,
     alignItems: 'center',
-    marginBottom: 12,
+    marginBottom: 10,
   },
   continueButtonActive: {
-    backgroundColor: '#07C168',
+    backgroundColor: '#1C39BB',
+  },
+  continueButtonInactive: {
+    backgroundColor: '#a0a0a0',
   },
   continueButtonText: {
-    color: '#fff',
     fontSize: 18,
     fontWeight: '600',
     letterSpacing: 0.5,
+    color: '#fff',
   },
   resetButton: {
     alignItems: 'center',
     padding: 10,
   },
+  resetButton: {
+    marginTop: 12,
+    alignSelf: 'center',
+  },
   resetButtonText: {
-    color: '#666',
-    fontSize: 15,
+    color: '#1C39BB',
+    textAlign: 'center',
+    marginTop: 8,
+    fontSize: 16,
+  },
+  resetButtonTextDisabled: {
+    color: '#CCCCCC',
+  },
+  resetButtonDisabled: {
+    opacity: 0.5,
   },
 });
 

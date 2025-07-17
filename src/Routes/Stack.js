@@ -95,8 +95,9 @@ import AgriAppointmentsList from "../Screens/Agriculture/Orderlisting/AgriOrderL
 import NewChangePassword from "../Screens/Dashboard/BookTest/changepassword";
 import EditUserProfile from "../Screens/Dashboard/BookTest/EditUserProfile";
 import StateSelectionScreen from "../Screens/GovernmentSchemes/StateSelectionScreen";
-
-// import AgriPickupSlot from "../Screens/Agriculture/AgriculturePage/AgriPickupSlot";
+import CasteSelectionScreen from "../Screens/GovernmentSchemes/CasteSelectionScreen";
+import DisabilityScreen from "../Screens/GovernmentSchemes/DisabilityScreen";
+import QualificationScreen from "../Screens/GovernmentSchemes/QualificationScreen";
 
 import {
   Abha,
@@ -493,6 +494,27 @@ export const StackNavigation = ({ navigation }) => {
       <Stack.Screen
         name="StateSelection"
         component={StateSelectionScreen}
+        options={{
+          headerShown: false,
+        }}
+      />
+      <Stack.Screen
+        name="CasteSelection"
+        component={CasteSelectionScreen}
+        options={{
+          headerShown: false,
+        }}
+      />
+      <Stack.Screen
+        name="DisabilityScreen"
+        component={DisabilityScreen}
+        options={{
+          headerShown: false,
+        }}
+      />
+      <Stack.Screen
+        name="QualificationScreen"
+        component={QualificationScreen}
         options={{
           headerShown: false,
         }}
