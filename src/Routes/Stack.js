@@ -143,12 +143,10 @@ import FilterScreen from "../Screens/Matrimony/FilterScreen";
 import ProfileDetailScreen from "../Screens/Matrimony/ProfileDetailScreen";
 import ChatsScreen from "../Screens/Matrimony/ChatScreen";
 import MatriBottomTabs from "../Screens/Matrimony/navigation/MatriBottomTab";
-<<<<<<< HEAD
+
 import { Logs, RegisteredContacts, SosAddContact, SosHome, SosPersonalInformation, SosPlan, SosSettings } from "../Screens/SOS";
 import MatrujyotiWelcomeScreen from "../Screens/Matrjyoti/MatrujyotiwelcomeScreen.js";
-import MatrujyotiNavigator from "../Screens/Matrjyoti/navigation/MatrujyotiNavigator.js";
-=======
->>>>>>> bb70ddfc1b0ccaadaa5de0801a71e594d5e81436
+import MatrujyotiNavigator from "../Screens/Matrjyoti/navigation/MatrujyotiNavigator.js"
 
 const Stack = createStackNavigator();
 
