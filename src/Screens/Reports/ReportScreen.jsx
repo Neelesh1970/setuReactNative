@@ -4,11 +4,9 @@ import { useFocusEffect } from "@react-navigation/native";
 import { s, vs } from "react-native-size-matters";
 import { Navbar, ReportCard } from "./Components";
 import { Text } from "react-native-gesture-handler";
-
+import { API_URI_REPORTS } from "@env";
 import axios from "axios";
 import { ReportScreenSkeleton } from "./Skeletons";
-
-const API_REPORTS = "http://192.168.1.4:7003/api/v1";
 
 const ReportScreen = () => {
   const [loading, setLoading] = useState(false);
@@ -19,7 +17,7 @@ const ReportScreen = () => {
   const fetchData = async () => {
     setLoading(true);
     try {
-      const response = await axios.get(`${API_REPORTS}/reports`);
+      const response = await axios.get(`${API_URI_REPORTS}/reports`);
       setReportData(response?.data?.data || []);
     } catch (err) {
       setError(err);
@@ -49,10 +47,7 @@ const ReportScreen = () => {
         <ReportScreenSkeleton />
       ) : (
         <>
-          <Navbar
-            navText={"Reports"}
-            functionIconName={"filter-menu-outline"}
-          />
+          <Navbar navText={"Reports"} functionIconName={"edit"} />
           <FlatList
             data={reportData}
             renderItem={renderItem}

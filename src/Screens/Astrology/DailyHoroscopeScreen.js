@@ -1,3 +1,4 @@
+import { useNavigation } from "@react-navigation/native";
 import React, { useEffect, useState } from "react";
 import {
   View,
@@ -12,6 +13,7 @@ import DropShadow from "react-native-drop-shadow";
 import LinearGradient from "react-native-linear-gradient";
 
 export default function DailyHoroscopeScreen({ route }) {
+  const navigation = useNavigation();
   const { zodiac } = route.params;
   const [prediction, setPrediction] = useState("");
   const [loading, setLoading] = useState(true);
@@ -22,7 +24,7 @@ export default function DailyHoroscopeScreen({ route }) {
 
   useEffect(() => {
     fetchHoroscope();
-    fetchAztroFuture();
+    // fetchAztroFuture();
   }, []);
 
   const fetchHoroscope = async () => {
@@ -38,25 +40,6 @@ export default function DailyHoroscopeScreen({ route }) {
       setPrediction("Could not load.");
     } finally {
       setLoading(false);
-    }
-  };
-
-  const fetchAztroFuture = async () => {
-    try {
-      const res = await fetch(
-        `https://aztro.sameerkumar.website/?sign=${zodiac.name.toLowerCase()}&day=today`,
-        { method: "POST" }
-      );
-      const json = await res.json();
-      console.log("Aztro response:", json);
-      setFutureDaily(json.description || "No daily future found.");
-      setFutureWeekly("Weekly prediction unavailable in free API.");
-    } catch (e) {
-      console.error("Aztro API error:", e);
-      setFutureDaily("Error fetching daily future.");
-      setFutureWeekly("Error fetching weekly future.");
-    } finally {
-      setLoadingFuture(false);
     }
   };
 
@@ -78,46 +61,17 @@ export default function DailyHoroscopeScreen({ route }) {
 
       <TouchableOpacity
         style={styles.futureToggleBtn}
-        onPress={() => setShowFuture(!showFuture)}
+        onPress={() => navigation.navigate("FutureAstrology", { zodiac })}
       >
-        <Text style={styles.futureToggleText}>
-          {showFuture ? "Hide Future" : "See Future 🔮"}
-        </Text>
+        <Text style={styles.futureToggleText}>See Future 🔮</Text>
       </TouchableOpacity>
 
-      {showFuture && (
-        <DropShadow
-          style={{
-            shadowColor: "#00000030",
-            shadowOffset: { width: 0, height: 0 },
-            shadowOpacity: 0.5,
-            shadowRadius: 2,
-          }}
-        >
-          <View style={styles.futureCard}>
-            <Text style={styles.futureTitle}>Future Horoscope (Aztro)</Text>
-
-            {loadingFuture ? (
-              <ActivityIndicator
-                size="large"
-                color="#1C39BB"
-                style={{ marginVertical: 20 }}
-              />
-            ) : (
-              <>
-                <View style={styles.futureBlock}>
-                  <Text style={styles.subTitle}>📅 Daily</Text>
-                  <Text style={styles.futureText}>{futureDaily}</Text>
-                </View>
-                <View style={styles.futureBlock}>
-                  <Text style={styles.subTitle}>📆 Weekly</Text>
-                  <Text style={styles.futureText}>{futureWeekly}</Text>
-                </View>
-              </>
-            )}
-          </View>
-        </DropShadow>
-      )}
+      <TouchableOpacity
+        style={styles.futureToggleBtn}
+        onPress={() => navigation.navigate("Panchang")}
+      >
+        <Text style={styles.futureToggleText}>📿 View Daily Panchang</Text>
+      </TouchableOpacity>
     </ScrollView>
   );
 }

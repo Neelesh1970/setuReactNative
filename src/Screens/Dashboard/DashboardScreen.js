@@ -21,7 +21,7 @@ import Schedule from "./Schedule";
 import SetuChat from "./SetuChat";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { useTranslation } from "react-i18next";
-import ReportScreen from "../Reports/ReportScreen";
+import { ReportsHome } from "../Reports";
 
 const Screen1 = () => {
   return <View style={styles.screen1}></View>;
@@ -161,7 +161,7 @@ export default function DashboardScreen({ navigation }) {
             name={t("report")}
             options={{ headerShown: false }}
             position="LEFT"
-            component={() => <ReportScreen mainNavigation={navigation} />}
+            component={() => <ReportsHome mainNavigation={navigation} />}
           />
           <CurvedBottomBarExpo.Screen
             name={t("schedule")}

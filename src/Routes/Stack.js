@@ -109,7 +109,7 @@ import {
   CreateAbhaNumber,
 } from "../Screens/Abha";
 import { s, vs } from "react-native-size-matters";
-import { ReportScreen, ViewReportScreen } from "../Screens/Reports";
+import { ReportScreen, ReportsHome, ViewReportScreen } from "../Screens/Reports";
 import AgricultureNavigator from "../Screens/NewAgriculture/navigation/AgricultureNavigator";
 import TempleAartiScreen from "../Screens/Temple_Aarti/TempleAartiScreen";
 import LiveAartiScreen from "../Screens/Temple_Aarti/LiveAartiscreen";
@@ -143,6 +143,10 @@ import ProfileDetailScreen from "../Screens/Matrimony/ProfileDetailScreen";
 import ChatsScreen from "../Screens/Matrimony/ChatScreen";
 import MatriBottomTabs from "../Screens/Matrimony/navigation/MatriBottomTab";
 import { Logs, RegisteredContacts, SosAddContact, SosHome, SosPersonalInformation, SosPlan, SosSettings } from "../Screens/SOS";
+import { Allergies, BiomedicalImplants, Immunization, LifeStyle, MediaViewer, MedicalDocumentsUpload, Medication, MedicationList, MedicineOrderHistory, TestList, TestReport, VitalSigns } from "../Screens/Reports/Screens";
+import Index from "../Screens/Payment";
+import PanchangScreen from "../Screens/Astrology/PanchangScreen";
+import FutureHoroscopeScreen from "../Screens/Astrology/FutureHoroscope";
 
 const Stack = createStackNavigator();
 
@@ -462,7 +466,7 @@ export const StackNavigation = ({ navigation }) => {
 
       <Stack.Screen
         name="PaymentPage"
-        component={index}
+        component={Index}
         options={{
           headerShown: false,
         }}
@@ -1289,7 +1293,7 @@ export const StackNavigation = ({ navigation }) => {
       />
 
       {/* Report screens */}
-      <Stack.Screen
+     <Stack.Screen
         name="ReportScreen"
         component={ReportScreen}
         options={{
@@ -1303,6 +1307,99 @@ export const StackNavigation = ({ navigation }) => {
           headerShown: false,
         }}
       />
+
+      <Stack.Screen
+        name="ReportsHome"
+        component={ReportsHome}
+        options={{
+          headerShown: false,
+        }}
+      />
+      <Stack.Screen
+        name="Medication"
+        component={Medication}
+        options={{
+          headerShown: false,
+        }}
+      />
+      <Stack.Screen
+        name="VitalSigns"
+        component={VitalSigns}
+        options={{
+          headerShown: false,
+        }}
+      />
+      <Stack.Screen
+        name="Allergies"
+        component={Allergies}
+        options={{
+          headerShown: false,
+        }}
+      />
+      <Stack.Screen
+        name="LifeStyle"
+        component={LifeStyle}
+        options={{
+          headerShown: false,
+        }}
+      />
+      <Stack.Screen
+        name="MedicalDocumentsUpload"
+        component={MedicalDocumentsUpload}
+        options={{
+          headerShown: false,
+        }}
+      />
+      <Stack.Screen
+        name="TestReport"
+        component={TestReport}
+        options={{
+          headerShown: false,
+        }}
+      />
+      <Stack.Screen
+        name="BiomedicalImplants"
+        component={BiomedicalImplants}
+        options={{
+          headerShown: false,
+        }}
+      />
+      <Stack.Screen
+        name="Immunization"
+        component={Immunization}
+        options={{
+          headerShown: false,
+        }}
+      />
+      <Stack.Screen
+        name="MedicationList"
+        component={MedicationList}
+        options={{
+          headerShown: false,
+        }}
+      />
+      <Stack.Screen
+        name="TestList"
+        component={TestList}
+        options={{
+          headerShown: false,
+        }}
+      />
+      <Stack.Screen
+        name="MediaViewer"
+        component={MediaViewer}
+        options={{
+          headerShown: false,
+        }}
+      />
+      <Stack.Screen
+        name="MedicineOrderHistory"
+        component={MedicineOrderHistory}
+        options={{
+          headerShown: false,
+        }}
+      />
+
 
       {/* Temple Aarti Screens */}
       <Stack.Screen
@@ -1566,6 +1663,40 @@ export const StackNavigation = ({ navigation }) => {
       <Stack.Screen
         name="DailyHoroscope"
         component={DailyHoroscopeScreen}
+        options={{
+          headerStyle: {
+            backgroundColor: "#1C39BB",
+          },
+          headerTitleStyle: {
+            // fontSize: s(16),
+            color: "#fff",
+          },
+          headerTintColor: "#fff",
+          headerTitleAlign: "center",
+          // headerShown: false,
+        }}
+      />
+
+      <Stack.Screen
+        name="Panchang"
+        component={PanchangScreen}
+        options={{
+          headerStyle: {
+            backgroundColor: "#1C39BB",
+          },
+          headerTitleStyle: {
+            // fontSize: s(16),
+            color: "#fff",
+          },
+          headerTintColor: "#fff",
+          headerTitleAlign: "center",
+          // headerShown: false,
+        }}
+      />
+
+      <Stack.Screen
+        name="FutureAstrology"
+        component={FutureHoroscopeScreen}
         options={{
           headerStyle: {
             backgroundColor: "#1C39BB",

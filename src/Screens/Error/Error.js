@@ -1,6 +1,7 @@
 import { Image, StyleSheet, Text, View, TouchableOpacity } from "react-native";
 import React from "react";
 import { useNavigation } from "@react-navigation/native";
+import { color } from "../../assets/colors/Colors";
 
 const Error = () => {
   const navigation = useNavigation();
@@ -38,7 +39,7 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
   button: {
-    backgroundColor: "#1C57A5",
+    backgroundColor:color.bottomViewColor,
     paddingVertical: 10,
     paddingHorizontal: 20,
     borderRadius: 5,

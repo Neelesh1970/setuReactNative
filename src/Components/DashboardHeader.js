@@ -23,12 +23,15 @@ import { fetchUserProfileAPI } from "../Utils/api/auth";
 import { setUserData } from "../features/user/userSlice";
 import ToastService from "../Utils/ToastService";
 import { showLoader, hideLoader } from "../Utils/Loader";
+import Ionicons from "react-native-vector-icons/Ionicons";
 
 const DashboardHeader = ({
   title = "Welcome",
-  name = "Nilesh",
+  name1 = "Nilesh",
   onPressNavigation,
   onBellPress,
+  searchText,
+  setSearchText,
 }) => {
   const navigation = useNavigation();
   const dispatch = useDispatch();
@@ -110,9 +113,11 @@ const DashboardHeader = ({
           </View>
 
           <View style={styles.rightUser}>
-            <View>
+            <View
+              style={{ flexDirection: "row", gap: 5, alignItems: "center" }}
+            >
               <Text style={styles.welcomeText}>Welcome</Text>
-              {/* <Text style={styles.nameText}>{name}</Text> */}
+              <Text style={styles.nameText}>{name1}</Text>
             </View>
             <TouchableOpacity onPress={fetchUserProfile}>
               <Image
@@ -125,13 +130,34 @@ const DashboardHeader = ({
 
         {/* Search Bar */}
         <View style={styles.searchBar}>
-          <Image source={Icons.search} style={styles.searchIcon} />
+          {/* Search Icon (Ionicons) */}
+          <Ionicons
+            name="search"
+            size={20}
+            color="#666"
+            style={styles.iconLeft}
+          />
+
+          {/* Search Input */}
           <TextInput
             placeholder="Search for Services"
             placeholderTextColor="#999"
             style={styles.input}
+            value={searchText}
+            onChangeText={setSearchText}
           />
-          <Image source={Icons.mic} style={styles.micIcon} />
+
+          {/* Mic Icon (Ionicons) */}
+          <TouchableOpacity
+            // onPress={isListening ? stopListening : startListening}
+          >
+            <Ionicons
+              // name={isListening ? "mic-circle" : "mic"}
+              size={24}
+              // color={isListening ? "red" : "#666"}
+              style={styles.iconRight}
+            />
+          </TouchableOpacity>
         </View>
       </View>
     </DropShadow>
@@ -185,8 +211,9 @@ const styles = StyleSheet.create({
   },
   welcomeText: {
     color: "white",
-    fontSize: 12,
+    fontSize: 14,
     textAlign: "right",
+    fontWeight: "bold",
   },
   nameText: {
     color: "white",
@@ -207,7 +234,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     paddingHorizontal: 10,
-    height: 35,
+    height: 40,
   },
   searchIcon: {
     width: 20,
@@ -228,5 +255,11 @@ const styles = StyleSheet.create({
     shadowOffset: { width: 0, height: 3 },
     shadowOpacity: 0.4,
     shadowRadius: 2,
+  },
+  iconLeft: {
+    marginRight: 10,
+  },
+  iconRight: {
+    marginLeft: 10,
   },
 });

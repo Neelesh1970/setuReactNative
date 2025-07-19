@@ -27,10 +27,6 @@ const ReportScreenSkeleton = () => {
 
   return (
     <View style={styles.section}>
-      <View style={styles.header}>
-        <Animated.View style={[styles.skeletonTitle, { opacity }]} />
-      </View>
-
       {/* Skeleton Grid Icons */}
       <View style={styles.cardBody}>
         {[...Array(8)].map((_, index) => (
@@ -44,27 +40,17 @@ const ReportScreenSkeleton = () => {
 const styles = StyleSheet.create({
   section: {
     marginVertical: verticalScale(10),
-    paddingHorizontal: scale(10),
+    // paddingHorizontal: scale(10),
     width: "100%",
   },
-  header: {
-    marginVertical: verticalScale(10),
-    paddingHorizontal: scale(10),
-  },
 
-  skeletonTitle: {
-    height: verticalScale(14),
-    backgroundColor: "#e1e1e1",
-    borderRadius: moderateScale(5),
-    width: scale(140),
-  },
   cardBody: {
-    marginTop: verticalScale(10),
+    marginBottom: verticalScale(10),
     paddingHorizontal: scale(10),
     gap: verticalScale(20),
   },
   card: {
-    height: verticalScale(100),
+    height: verticalScale(80),
     backgroundColor: "#e1e1e1",
     borderRadius: moderateScale(5),
     width: "100%",

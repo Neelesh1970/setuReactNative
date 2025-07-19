@@ -6,7 +6,7 @@ console.log("API_URL_AUTH", API_URL_AUTH);
 const loginUser = async (data) => {
   try {
     const response = await axios.post(
-      `${API_URL_AUTH}/auth/login`,
+      `${API_URL_AUTH}/login`,
       JSON.stringify(data),
       {
         headers: {

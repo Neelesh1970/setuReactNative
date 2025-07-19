@@ -8,6 +8,7 @@ import {
   Text,
   ScrollView,
   StatusBar,
+  TextInput,
 } from "react-native";
 import { color } from "../../assets/colors/Colors";
 import { Icons } from "../../assets/icons/Icons";
@@ -134,6 +135,7 @@ export default function HomeScreen({ mainNavigation }) {
   const [numberOfColumn, setNumberOfColumn] = useState(isTablet() ? 4 : 3);
   const [username, setUsername] = useState(null);
   const [userName, setUserName] = useState(null);
+  const [searchText, setSearchText] = useState("");
 
   const iconSizes = {
     32: { width: 100, height: 100 },
@@ -220,7 +222,7 @@ export default function HomeScreen({ mainNavigation }) {
     } else if (index === 27) {
       mainNavigation.navigate("ZodiacSign");
     } else if (index === 28) {
-      mainNavigation.navigate("Register1")
+      mainNavigation.navigate("Register1");
     }
     // else {
     //   mainNavigation.navigate("DrugDirectoryHome");
@@ -291,12 +293,24 @@ export default function HomeScreen({ mainNavigation }) {
       <DashboardHeader
         title={"Welcome"}
         name={userName}
+        searchText={searchText}
+        setSearchText={setSearchText}
         onPressNavigation={() => {
           // setSidebarVisible(true)
           console.log("Main Navigation", mainNavigation);
           navigation.toggleDrawer();
         }}
       />
+
+      {/* <View style={styles.searchContainer}>
+        <TextInput
+          placeholder="Search modules..."
+          value={searchText}
+          onChangeText={setSearchText}
+          style={styles.searchInput}
+          placeholderTextColor="#666"
+        />
+      </View> */}
       {/* {sidebarVisible && <CustomSidebar isVisible={sidebarVisible} onClose={() => setSidebarVisible(false)} />} */}
       <StatusBar backgroundColor={color.editBlue} />
       {/* <BottomSlider /> */}
@@ -340,7 +354,12 @@ export default function HomeScreen({ mainNavigation }) {
 
       <FlatList
         ListHeaderComponent={<BottomSlider />}
-        data={formatData(HomeIcons, numberOfColumn)}
+        data={formatData(
+          HomeIcons.filter((item) =>
+            item.label.toLowerCase().includes(searchText.toLowerCase())
+          ),
+          numberOfColumn
+        )}
         renderItem={renderHomeIcons}
         keyExtractor={(item) => item.id.toString()}
         numColumns={numberOfColumn}
@@ -412,5 +431,19 @@ export const styles = StyleSheet.create({
   },
   inactiveDot: {
     backgroundColor: "gray",
+  },
+  searchContainer: {
+    paddingHorizontal: 16,
+    paddingVertical: 10,
+    backgroundColor: "#F5F5F5",
+  },
+  searchInput: {
+    backgroundColor: "#fff",
+    borderRadius: 10,
+    paddingHorizontal: 15,
+    height: 45,
+    borderWidth: 1,
+    borderColor: "#ccc",
+    fontSize: 16,
   },
 });

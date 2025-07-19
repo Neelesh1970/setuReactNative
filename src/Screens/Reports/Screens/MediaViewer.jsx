@@ -10,32 +10,22 @@ import {
   Alert,
   ActivityIndicator,
   Dimensions,
-  PermissionsAndroid,
   Animated,
 } from "react-native";
 import React, { useState, useEffect, useRef } from "react";
-import { Navbar } from "./Components";
 import { useNavigation } from "@react-navigation/native";
-import MaterialIcons from "react-native-vector-icons/MaterialIcons";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 import { ms, s, vs } from "react-native-size-matters";
-import { Icons } from "../../assets/icons/Icons";
 import Pdf from "react-native-pdf";
 import RNFetchBlob from "rn-fetch-blob";
-import ViewShot from "react-native-view-shot";
-import { captureRef } from "react-native-view-shot";
+import { Navbar } from "../Components";
 
 const { width, height } = Dimensions.get("window");
 
-const ViewReportScreen = ({ route }) => {
-  const [hideDownloadIcon, setHideDownloadIcon] = useState(false);
-
-  const reportBodyRef = useRef();
-
-  const { report } = route.params;
+const MediaViewer = ({ route }) => {
+  const { title, mediaURLs } = route.params;
   const navigation = useNavigation();
   const [pdfStates, setPdfStates] = useState({});
-  const { title, mediaURLs, content } = report;
   const [downloadLoading, setDownloadLoading] = useState(false);
   const [downloadProgress, setDownloadProgress] = useState({
     total: 0,
@@ -44,22 +34,21 @@ const ViewReportScreen = ({ route }) => {
   });
   const [cachedPdfUris, setCachedPdfUris] = useState({});
   const [showDownloadAll, setShowDownloadAll] = useState(false);
+  const [imageLoadStatus, setImageLoadStatus] = useState({});
   const fadeAnim = useRef(new Animated.Value(0)).current;
+
   const cachePdfFile = async (url, index) => {
     try {
-      // Only cache if we haven't already
       if (cachedPdfUris[index]) return;
 
       const filePath = `${RNFetchBlob.fs.dirs.CacheDir}/temp_pdf_${index}.pdf`;
 
-      // Download the file
       const res = await RNFetchBlob.config({
         fileCache: true,
         path: filePath,
-        trusty: true, // Bypass SSL validation for download
+        trusty: true,
       }).fetch("GET", url);
 
-      // Store the local file path
       setCachedPdfUris((prev) => ({
         ...prev,
         [index]: res.path(),
@@ -68,7 +57,7 @@ const ViewReportScreen = ({ route }) => {
       return res.path();
     } catch (error) {
       console.error(`Error caching PDF ${index}:`, error);
-      return url; // Fallback to original URL
+      return url;
     }
   };
 
@@ -87,76 +76,6 @@ const ViewReportScreen = ({ route }) => {
 
     cacheAllPdfs();
   }, [mediaURLs]);
-
-  const downloadReportAsImage = async () => {
-    try {
-      setHideDownloadIcon(true);
-      await new Promise((resolve) => requestAnimationFrame(resolve));
-
-      const uri = await captureRef(reportBodyRef, {
-        format: "jpg",
-        quality: 0.9,
-      });
-
-      if (Platform.OS === "android") {
-        // For Android 10+ (API 29+), we don't need WRITE_EXTERNAL_STORAGE for Downloads
-        if (Platform.Version < 29) {
-          const granted = await PermissionsAndroid.request(
-            PermissionsAndroid.PERMISSIONS.WRITE_EXTERNAL_STORAGE,
-            {
-              title: "Storage Permission",
-              message: "App needs access to storage to save files",
-              buttonNeutral: "Ask Me Later",
-              buttonNegative: "Cancel",
-              buttonPositive: "OK",
-            }
-          );
-
-          if (granted !== PermissionsAndroid.RESULTS.GRANTED) {
-            throw new Error("Storage permission denied");
-          }
-        }
-      }
-
-      // Generate file path
-      const fileName = `Report_${new Date().getTime()}.jpg`;
-      const filePath = `${RNFetchBlob.fs.dirs.DownloadDir}/${fileName}`;
-
-      // Save the file
-      await RNFetchBlob.fs.cp(uri, filePath);
-
-      // For Android, add to downloads
-      if (Platform.OS === "android") {
-        RNFetchBlob.android.addCompleteDownload({
-          title: fileName,
-          description: "Report image downloaded",
-          mime: "image/jpeg",
-          path: filePath,
-          showNotification: true,
-        });
-      }
-
-      Alert.alert("Success", `Report saved to Downloads folder`);
-    } catch (error) {
-      console.error("Error saving report:", error);
-      Alert.alert(
-        "Error",
-        "Failed to save report. Please check app permissions in settings.",
-        [
-          {
-            text: "Open Settings",
-            onPress: () => Linking.openSettings(),
-          },
-          {
-            text: "Cancel",
-            style: "cancel",
-          },
-        ]
-      );
-    } finally {
-      setHideDownloadIcon(false);
-    }
-  };
 
   const handleBackPress = () => {
     navigation.goBack();
@@ -189,17 +108,15 @@ const ViewReportScreen = ({ route }) => {
           path: filePath,
           description: "Downloading file",
         },
-
         ios: {
           fileCache: true,
           path: filePath,
         },
       };
 
-      // For SSL issues, add trusty option
       const res = await config({
         ...options,
-        trusty: true, // This handles SSL certificate issues
+        trusty: true,
       }).fetch("GET", url);
 
       if (Platform.OS === "ios") {
@@ -232,9 +149,21 @@ const ViewReportScreen = ({ route }) => {
     return url?.toLowerCase().endsWith(".pdf");
   };
 
-  const isImage = (url) => {
-    const imageExtensions = [".jpg", ".jpeg", ".png", ".gif", ".bmp"];
-    return imageExtensions.some((ext) => url?.toLowerCase().endsWith(ext));
+  const isLikelyImage = (url) => {
+    const imageExtensions = [".jpg", ".jpeg", ".png", ".gif", ".bmp", ".webp"];
+    if (imageExtensions.some((ext) => url?.toLowerCase().endsWith(ext))) {
+      return true;
+    }
+
+    return true;
+  };
+
+  const handleImageLoad = (index) => {
+    setImageLoadStatus((prev) => ({ ...prev, [index]: true }));
+  };
+
+  const handleImageError = (index) => {
+    setImageLoadStatus((prev) => ({ ...prev, [index]: false }));
   };
 
   const onPdfLoadComplete = (index) => (numberOfPages, filePath) => {
@@ -246,7 +175,6 @@ const ViewReportScreen = ({ route }) => {
 
   const onPdfError = (index) => (error) => {
     console.log(`PDF error for document ${index}:`, error);
-    // First try the original URL if we were using cached version
     if (cachedPdfUris[index]) {
       setPdfStates((prev) => ({
         ...prev,
@@ -267,8 +195,7 @@ const ViewReportScreen = ({ route }) => {
 
   const downloadALLFile = async () => {
     try {
-      // Calculate total files (ViewShot + all media URLs)
-      const totalFiles = 1 + (mediaURLs?.length || 0);
+      const totalFiles = mediaURLs?.length || 0;
       setDownloadProgress({
         total: totalFiles,
         completed: 0,
@@ -276,39 +203,6 @@ const ViewReportScreen = ({ route }) => {
       });
       setDownloadLoading(true);
 
-      // 1. First download the ViewShot
-      setDownloadProgress((prev) => ({
-        ...prev,
-        currentFile: "Saving report snapshot...",
-      }));
-
-      const viewShotUri = await captureRef(reportBodyRef, {
-        format: "jpg",
-        quality: 0.9,
-      });
-
-      const viewShotFileName = `Report_${new Date().getTime()}.jpg`;
-      const viewShotPath = `${RNFetchBlob.fs.dirs.DownloadDir}/${viewShotFileName}`;
-
-      await RNFetchBlob.fs.cp(viewShotUri, viewShotPath);
-
-      if (Platform.OS === "android") {
-        RNFetchBlob.android.addCompleteDownload({
-          title: viewShotFileName,
-          description: "Report image downloaded",
-          mime: "image/jpeg",
-          path: viewShotPath,
-          showNotification: false,
-        });
-      }
-
-      setDownloadProgress((prev) => ({
-        ...prev,
-        completed: prev.completed + 1,
-        currentFile: "Report snapshot saved",
-      }));
-
-      // 2. Download all media files
       if (mediaURLs?.length > 0) {
         for (let i = 0; i < mediaURLs.length; i++) {
           const url = mediaURLs[i];
@@ -428,63 +322,6 @@ const ViewReportScreen = ({ route }) => {
       )}
 
       <ScrollView style={styles.reportBody}>
-        <ViewShot
-          ref={reportBodyRef}
-          options={{ format: "jpg", quality: 0.9 }}
-          style={{ backgroundColor: "#ffffff" }}
-        >
-          <View style={styles.reportBodyBox}>
-            <View style={styles.reportBodyHeader}>
-              <View style={styles.reportBodyHeaderRow}>
-                <Image source={Icons.setu_logo} style={styles.setuImage} />
-                <Text
-                  numberOfLines={1}
-                  ellipsizeMode="tail"
-                  style={styles.titleText}
-                >
-                  {title}
-                </Text>
-              </View>
-              {!hideDownloadIcon && (
-                <TouchableOpacity onPress={downloadReportAsImage}>
-                  <MaterialCommunityIcons
-                    name="download-outline"
-                    color="#2372B5"
-                    size={s(24)}
-                  />
-                </TouchableOpacity>
-              )}
-            </View>
-            <View style={styles.reportContentBody}>
-              {Object.entries(content).map(([key, value]) => {
-                const formattedKey = key
-                  .replace(/([A-Z])/g, " $1")
-                  .replace(/^./, (str) => str.toUpperCase());
-                return (
-                  <View key={key} style={styles.contentRow}>
-                    <Text style={styles.contentKey}>{formattedKey}:</Text>
-                    <Text style={styles.contentValue}> {String(value)}</Text>
-                  </View>
-                );
-              })}
-            </View>
-            <View style={styles.verifyBody}>
-              <View style={styles.verifyRow}>
-                <View style={styles.verifyIconBox}>
-                  <MaterialIcons
-                    name="verified-user"
-                    color="#1B970F"
-                    size={s(40)}
-                  />
-                </View>
-                <View style={styles.verifyTextBox}>
-                  <Text style={styles.verifyText}>Verified By Setu</Text>
-                  <View style={styles.diagonalBox} />
-                </View>
-              </View>
-            </View>
-          </View>
-        </ViewShot>
         <View style={{ paddingBottom: vs(50) }}>
           {mediaURLs?.map((url, index) => (
             <View key={index} style={styles.mediaBody}>
@@ -538,12 +375,36 @@ const ViewReportScreen = ({ route }) => {
                       />
                     </View>
                   )
-                ) : isImage(url) ? (
-                  <Image
-                    source={{ uri: url }}
-                    style={styles.image}
-                    resizeMode="contain"
-                  />
+                ) : isLikelyImage(url) ? (
+                  <>
+                    <Image
+                      source={{ uri: url }}
+                      style={styles.image}
+                      resizeMode="contain"
+                      onLoad={() => handleImageLoad(index)}
+                      onError={() => handleImageError(index)}
+                    />
+                    {imageLoadStatus[index] === false && (
+                      <View style={styles.unknownFile}>
+                        <MaterialCommunityIcons
+                          name="file-question"
+                          size={s(50)}
+                          color="#2372B5"
+                        />
+                        <Text style={styles.unknownFileText}>
+                          Could not load content
+                        </Text>
+                        <TouchableOpacity
+                          style={styles.openInBrowserButton}
+                          onPress={() => Linking.openURL(url)}
+                        >
+                          <Text style={styles.openInBrowserText}>
+                            Open in Browser
+                          </Text>
+                        </TouchableOpacity>
+                      </View>
+                    )}
+                  </>
                 ) : (
                   <View style={styles.unknownFile}>
                     <MaterialCommunityIcons
@@ -554,6 +415,14 @@ const ViewReportScreen = ({ route }) => {
                     <Text style={styles.unknownFileText}>
                       Unsupported file format
                     </Text>
+                    <TouchableOpacity
+                      style={styles.openInBrowserButton}
+                      onPress={() => Linking.openURL(url)}
+                    >
+                      <Text style={styles.openInBrowserText}>
+                        Open in Browser
+                      </Text>
+                    </TouchableOpacity>
                   </View>
                 )}
               </View>
@@ -592,7 +461,6 @@ const ViewReportScreen = ({ route }) => {
     </View>
   );
 };
-export default ViewReportScreen;
 
 const styles = StyleSheet.create({
   container: { flex: 1, backgroundColor: "#fff" },
@@ -600,92 +468,6 @@ const styles = StyleSheet.create({
     paddingHorizontal: s(12),
     paddingVertical: vs(5),
     paddingTop: vs(20),
-  },
-  reportBodyBox: {
-    borderWidth: 1,
-    borderColor: "#d3d3d3",
-    borderRadius: 6,
-    backgroundColor: "#fff",
-  },
-  reportBodyHeader: {
-    flexDirection: "row",
-    gap: s(20),
-    padding: ms(12),
-    alignItems: "center",
-    borderBottomWidth: 1,
-    borderColor: "#d3d3d3",
-    justifyContent: "space-between",
-  },
-  reportBodyHeaderRow: {
-    flexDirection: "row",
-    gap: s(20),
-    alignItems: "center",
-  },
-  setuImage: {
-    height: ms(60),
-    width: ms(60),
-    resizeMode: "contain",
-    borderWidth: 1,
-    borderColor: "#ececec",
-    borderRadius: 6,
-  },
-  titleText: {
-    fontSize: s(16),
-    fontWeight: "bold",
-    color: "#333333",
-  },
-  reportContentBody: {
-    padding: ms(12),
-    borderBottomWidth: 1,
-    borderColor: "#d3d3d3",
-  },
-  contentRow: {
-    flexDirection: "row",
-    flexWrap: "wrap",
-    marginBottom: vs(8),
-  },
-  contentKey: {
-    fontWeight: "bold",
-    color: "#333",
-  },
-  contentValue: {
-    color: "#333",
-  },
-  verifyBody: {
-    padding: ms(12),
-    marginVertical: vs(8),
-  },
-  verifyRow: {
-    flexDirection: "row",
-  },
-  verifyIconBox: {
-    borderWidth: 1,
-    borderColor: "#2372B5",
-    borderRadius: 6,
-    padding: ms(3),
-    backgroundColor: "#D4FDCA",
-  },
-  verifyTextBox: {
-    backgroundColor: "#2372B5",
-    alignSelf: "flex-start",
-    paddingVertical: vs(5),
-    marginTop: vs(5),
-    paddingLeft: s(15),
-    paddingRight: s(40),
-    position: "relative",
-  },
-  verifyText: {
-    color: "#ffffff",
-    fontSize: s(11),
-    fontWeight: 600,
-  },
-  diagonalBox: {
-    backgroundColor: "#ffffff",
-    transform: [{ rotate: "45deg" }],
-    height: vs(25),
-    width: vs(25),
-    position: "absolute",
-    right: s(-10),
   },
   mediaBody: {
     marginTop: vs(20),
@@ -739,8 +521,8 @@ const styles = StyleSheet.create({
     marginTop: vs(10),
     color: "#2372B5",
     fontSize: s(14),
+    textAlign: "center",
   },
-  loader: {},
   loaderBody: {
     position: "absolute",
     width: width,
@@ -804,4 +586,16 @@ const styles = StyleSheet.create({
     color: "#ffffff",
     fontWeight: 600,
   },
+  openInBrowserButton: {
+    marginTop: vs(10),
+    padding: vs(5),
+    backgroundColor: "#2372B5",
+    borderRadius: 4,
+  },
+  openInBrowserText: {
+    color: "#ffffff",
+    fontSize: s(12),
+  },
 });
+
+export default MediaViewer;
