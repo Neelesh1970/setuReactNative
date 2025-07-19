@@ -6,7 +6,6 @@ import { agricultureReducer } from "../features/agriculture";
 import { userReducer } from "../features/user";
 import { jobsReducer } from "../features/jobs";
 import mentalHealthReducer from "../features/mentalHealth/mentalSlice";
-import { sosReducer, userHealthProfileReducer } from "../features/sos";
 
 // import thunk from 'redux-thunk';
 
@@ -19,9 +18,6 @@ const store = configureStore({
     user: userReducer,
     jobs: jobsReducer,
     mentalHealth: mentalHealthReducer,
-
-    sos : sosReducer,
-    userHealthProfile : userHealthProfileReducer 
   },
   // middleware: (getDefaultMiddleware) =>
   //   getDefaultMiddleware().concat(thunk),
