@@ -143,9 +143,12 @@ import FilterScreen from "../Screens/Matrimony/FilterScreen";
 import ProfileDetailScreen from "../Screens/Matrimony/ProfileDetailScreen";
 import ChatsScreen from "../Screens/Matrimony/ChatScreen";
 import MatriBottomTabs from "../Screens/Matrimony/navigation/MatriBottomTab";
+<<<<<<< HEAD
 import { Logs, RegisteredContacts, SosAddContact, SosHome, SosPersonalInformation, SosPlan, SosSettings } from "../Screens/SOS";
 import MatrujyotiWelcomeScreen from "../Screens/Matrjyoti/MatrujyotiwelcomeScreen.js";
 import MatrujyotiNavigator from "../Screens/Matrjyoti/navigation/MatrujyotiNavigator.js";
+=======
+>>>>>>> bb70ddfc1b0ccaadaa5de0801a71e594d5e81436
 
 const Stack = createStackNavigator();
 
@@ -1651,58 +1654,6 @@ export const StackNavigation = ({ navigation }) => {
         name="MatriBottomTab"
         component={MatriBottomTabs}
         options={{ headerShown: false }}
-      />
-
-
-        {/* SOS Screens */}
-      <Stack.Screen
-        name="SosHome"
-        component={SosHome}
-        options={{
-          headerShown: false,
-        }}
-      />
-      <Stack.Screen
-        name="RegisteredContacts"
-        component={RegisteredContacts}
-        options={{
-          headerShown: false,
-        }}
-      />
-      <Stack.Screen
-        name="SosPersonalInformation"
-        component={SosPersonalInformation}
-        options={{
-          headerShown: false,
-        }}
-      />
-      <Stack.Screen
-        name="Logs"
-        component={Logs}
-        options={{
-          headerShown: false,
-        }}
-      />
-      <Stack.Screen
-        name="SosSettings"
-        component={SosSettings}
-        options={{
-          headerShown: false,
-        }}
-      />
-      <Stack.Screen
-        name="SosPlan"
-        component={SosPlan}
-        options={{
-          headerShown: false,
-        }}
-      />
-      <Stack.Screen
-        name="SosAddContact"
-        component={SosAddContact}
-        options={{
-          headerShown: false,
-        }}
       />
 
     </Stack.Navigator>
