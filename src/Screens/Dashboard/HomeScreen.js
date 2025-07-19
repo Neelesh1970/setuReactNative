@@ -221,6 +221,9 @@ export default function HomeScreen({ mainNavigation }) {
       mainNavigation.navigate("ZodiacSign");
     } else if (index === 28) {
       mainNavigation.navigate("Register1")
+    } else if (index === 6) {
+      // Navigate to Matrjyoti screen
+      mainNavigation.navigate("MatrjyotiScreen");
     }
     // else {
     //   mainNavigation.navigate("DrugDirectoryHome");

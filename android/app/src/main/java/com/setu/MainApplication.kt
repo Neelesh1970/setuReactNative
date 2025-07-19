@@ -11,6 +11,8 @@ import com.facebook.react.defaults.DefaultReactHost.getDefaultReactHost
 import com.facebook.react.defaults.DefaultReactNativeHost
 import com.facebook.react.soloader.OpenSourceMergedSoMapping
 import com.facebook.soloader.SoLoader
+import com.zoontek.rnbootsplash.RNBootSplashPackage
+import com.zoontek.rnpermissions.RNPermissionsPackage
 
 class MainApplication : Application(), ReactApplication {
 
