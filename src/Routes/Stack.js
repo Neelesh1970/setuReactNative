@@ -95,6 +95,7 @@ import AgriAppointmentsList from "../Screens/Agriculture/Orderlisting/AgriOrderL
 import NewChangePassword from "../Screens/Dashboard/BookTest/changepassword";
 import EditUserProfile from "../Screens/Dashboard/BookTest/EditUserProfile";
 import StateSelectionScreen from "../Screens/GovernmentSchemes/StateSelectionScreen";
+import MatrjyotiScreen from "../Screens/Matrjyoti/MatrujyotiwelcomeScreen.js";
 import CasteSelectionScreen from "../Screens/GovernmentSchemes/CasteSelectionScreen";
 import DisabilityScreen from "../Screens/GovernmentSchemes/DisabilityScreen";
 import QualificationScreen from "../Screens/GovernmentSchemes/QualificationScreen";
@@ -202,7 +203,22 @@ export const StackNavigation = ({ navigation }) => {
           headerShown: false,
         }}
       />
-
+      {/* matrjyoti*/}
+      {/* <Stack.Screen
+        name="MatrjyotiScreen"
+        component={MatrujyotiWelcomeScreen}
+        options={{
+          headerShown: false,
+        }}
+      /> */}
+        
+        <Stack.Screen
+        name="MatrjyotiScreen"
+        component={MatrujyotiNavigator}
+        options={{
+          headerShown: false,
+        }}
+      />
       {/* <Stack.Screen
         name="FindDoctor"
         component={FindDoctors}
@@ -1764,58 +1780,6 @@ export const StackNavigation = ({ navigation }) => {
         name="MatriBottomTab"
         component={MatriBottomTabs}
         options={{ headerShown: false }}
-      />
-
-
-        {/* SOS Screens */}
-      <Stack.Screen
-        name="SosHome"
-        component={SosHome}
-        options={{
-          headerShown: false,
-        }}
-      />
-      <Stack.Screen
-        name="RegisteredContacts"
-        component={RegisteredContacts}
-        options={{
-          headerShown: false,
-        }}
-      />
-      <Stack.Screen
-        name="SosPersonalInformation"
-        component={SosPersonalInformation}
-        options={{
-          headerShown: false,
-        }}
-      />
-      <Stack.Screen
-        name="Logs"
-        component={Logs}
-        options={{
-          headerShown: false,
-        }}
-      />
-      <Stack.Screen
-        name="SosSettings"
-        component={SosSettings}
-        options={{
-          headerShown: false,
-        }}
-      />
-      <Stack.Screen
-        name="SosPlan"
-        component={SosPlan}
-        options={{
-          headerShown: false,
-        }}
-      />
-      <Stack.Screen
-        name="SosAddContact"
-        component={SosAddContact}
-        options={{
-          headerShown: false,
-        }}
       />
 
     </Stack.Navigator>
