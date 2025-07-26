@@ -147,6 +147,14 @@ import { Allergies, BiomedicalImplants, Immunization, LifeStyle, MediaViewer, Me
 import PanchangScreen from "../Screens/Astrology/PanchangScreen";
 import FutureHoroscopeScreen from "../Screens/Astrology/FutureHoroscope";
 import MatrujyotiNavigator from "../Screens/Matrjyoti/navigation/MatrujyotiNavigator";
+import InsuranceHubScreen from "../Screens/Insurance/InsuranceHubScreen";
+import ShopScreen from "../Screens/E_cart/E_cartHomescreen";
+import ProductDetailScreen from "../Screens/E_cart/productHomeScreen";
+import ECartScreen from "../Screens/E_cart/E_CartScreen";
+import CheckoutScreen from "../Screens/E_cart/CheckOutScreen";
+import OrderPlacedScreen from "../Screens/E_cart/OrderPlacedScreen";
+import OrdersScreen from "../Screens/E_cart/OrderDetailScreen";
+import EcartStack from "../Screens/E_cart/ECartStack";
 
 const Stack = createStackNavigator();
 
@@ -1824,6 +1832,21 @@ export const StackNavigation = ({ navigation }) => {
         }}
       />
 
+      {/* Insurance Screens  */}
+      <Stack.Screen
+        name="InsuranceHome"
+        component={InsuranceHubScreen}
+        options={{
+          headerShown: false,
+        }}/>
+
+
+        {/* E_Cart Screens */}
+     <Stack.Screen
+     name="EcartFlow"
+     component={EcartStack}
+      options={{ headerShown: false }}
+    />
     </Stack.Navigator>
   );
 };

@@ -224,7 +224,14 @@ export default function HomeScreen({ mainNavigation }) {
       mainNavigation.navigate("Register1");
     } else if (index === 6){
       mainNavigation.navigate("Matrujyoti")
+    } else if (index === 4) {
+      mainNavigation.navigate("InsuranceHome"); 
+    } else if (index === 13) {
+      mainNavigation.navigate("EcartFlow");
     }
+
+
+    
     // else {
     //   mainNavigation.navigate("DrugDirectoryHome");
     // }
